@@ -1,12 +1,11 @@
-import { LightningElement } from 'lwc';
+import { LightningElement,api } from 'lwc';
 
-expoaseURL =
-'https://github.com/trailheadapps/lwc-recipes/tree/main/force-app/main/default/';
+export default class ViewSource extends LightningElement {
+    baseURL ='https://github.com/Cloud9Force/LearnLWC/tree/main/force-app/main/default/';
 
-@api source;
+    @api source;
 
-get sourceURL() {
-return this.baseURL + this.source;
-}rt default class ViewSource extends LightningElement {
-
+    get sourceURL() {
+        return this.baseURL + this.source;
+    }
 }
