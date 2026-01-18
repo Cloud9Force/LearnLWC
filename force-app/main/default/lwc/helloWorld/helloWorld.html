@@ -1,0 +1,47 @@
+<template>
+    
+<lightning-card title="HelloWorld" icon-name="custom:custom14">
+    <div class="slds-m-top_medium slds-m-bottom_x-large">
+        <p class="slds-m-bottom_medium">
+            Live data binding with computed values, conditional UI, and actions.
+        </p>
+
+        <div class="slds-p-around_medium lgc-bg">
+            <lightning-input
+                type="text"
+                label="Enter some text"
+                value={textValue}
+                maxlength={maxLength}
+                disabled={isDisabled}
+                onchange={handleInputChange}
+                placeholder="type here..."
+                message-when-too-long="Your email address must not be more than 50 characters."
+            ></lightning-input>
+        </div>
+
+        <div class="slds-m-vertical_medium">
+            <p>The value of the input field is: <span class="slds-text-heading_small">{textValue}</span></p>
+            <p>Uppercase preview: <span class="slds-text-heading_small">{uppercasePreview}</span></p>
+            <p>Remaining characters: <span class="slds-text-heading_small">{remainingChars}</span></p>
+            <p if:true={lastUpdated}>Last updated at: <span class="slds-text-heading_small">{lastUpdated}</span></p>
+        </div>
+
+        <div class="slds-m-vertical_medium">
+            <lightning-input
+                type="checkbox"
+                label="Disable text input"
+                checked={isDisabled}
+                onchange={handleToggleDisable}
+            ></lightning-input>
+        </div>
+
+        <div class="slds-m-vertical_medium">
+            <lightning-button label="Clear" variant="neutral" onclick={handleClear}></lightning-button>
+        </div>
+
+        <div if:true={isOverLimit} class="slds-text-color_error">
+            You have exceeded the max length of {maxLength} characters.
+        </div>
+    </div>
+</lightning-card>
+</template>
