@@ -1,0 +1,86 @@
+<template>
+    <lightning-card title="LWC Data Composition Recipes (Expanded)">
+        <div class="slds-p-around_medium slds-grid slds-wrap">
+
+            <!-- ==================== -->
+            <!-- Static Primitive -->
+            <!-- ==================== -->
+            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                <!--
+                    TEACHING:
+                    - Pass a static primitive string/number via HTML attribute.
+                    - Child receives via @api.
+                    - Primitives are safe by value.
+                -->
+                <c-primitive-child
+                    heading="Static Primitive"
+                    message="Hello from Parent (static)">
+                </c-primitive-child>
+            </div>
+
+            <!-- ==================== -->
+            <!-- Dynamic Primitive -->
+            <!-- ==================== -->
+            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                <c-primitive-child
+                    heading="Dynamic Primitive"
+                    message={dynamicMessage}>
+                </c-primitive-child>
+            </div>
+
+            <!-- ==================== -->
+            <!-- Non-Primitive Object -->
+            <!-- ==================== -->
+            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                <c-non-primitive-object-child
+                    record={accountObject}>
+                </c-non-primitive-object-child>
+            </div>
+
+            <!-- ==================== -->
+            <!-- Non-Primitive Array Iteration -->
+            <!-- ==================== -->
+            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                <!--
+                    TEACHING:
+                    - Iterating over arrays in LWC.
+                    - Do NOT mutate parent array directly in child.
+                    - Use shallow copies if updating.
+                -->
+                <c-array-iteration-child
+                    items={itemList}>
+                </c-array-iteration-child>
+            </div>
+
+            <!-- ==================== -->
+            <!-- Immutability Demo (Shallow Copy) -->
+            <!-- ==================== -->
+            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                <!--
+                    TEACHING:
+                    - Show immutability anti-pattern and correct pattern with shallow copy.
+                -->
+                <c-immutability-demo-child
+                    original-object={accountObject}
+                    original-array={itemList}>
+                </c-immutability-demo-child>
+            </div>
+
+            <!-- ==================== -->
+            <!-- Child to Parent Event -->
+            <!-- ==================== -->
+            <div class="slds-col slds-size_1-of-1">
+                <c-child-to-parent-child
+                    onnotifyparent={handleChildNotification}>
+                </c-child-to-parent-child>
+            </div>
+
+        </div>
+
+        <!-- Trailhead-style View Source Footer -->
+        <c-view-source source="lwc/dataCompositionRecipes" slot="footer">
+            Combine multiple children to illustrate data passing patterns including iteration
+            and immutability/shallow copy patterns.
+        </c-view-source>
+    </lightning-card>
+</template>

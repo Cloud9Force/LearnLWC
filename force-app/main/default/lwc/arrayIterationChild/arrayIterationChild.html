@@ -1,0 +1,10 @@
+<template>
+    <div class="slds-box slds-theme_alert-texture">
+        <p class="slds-text-title_caps">Array Iteration Demo</p>
+        <ul class="slds-list_dotted">
+            <template for:each={items} for:item="it">
+                <li key={it.id}>{it.label}</li>
+            </template>
+        </ul>
+    </div>
+</template>

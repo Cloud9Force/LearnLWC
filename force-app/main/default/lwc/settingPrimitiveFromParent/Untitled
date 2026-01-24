@@ -1,0 +1,8 @@
+<template>
+    <!--
+        Passing a primitive value (string) to the child.
+        Attribute name uses kebab-case.
+        Property name in JS uses camelCase.
+    -->
+    <c-setting-primitive-to-child message={parentMessage}></c-setting-primitive-to-child>
+</template>

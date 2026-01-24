@@ -1,0 +1,10 @@
+<template>
+    <div class="slds-box slds-theme_alert-texture">
+        <p class="slds-text-title_caps">Non-Primitive Array</p>
+        <ul class="slds-list_dotted">
+            <template for:each={items} for:item="item">
+                <li key={item.id}>{item.label}</li>
+            </template>
+        </ul>
+    </div>
+</template>
