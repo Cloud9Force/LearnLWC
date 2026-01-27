@@ -230,3 +230,253 @@ Lightning Web Components use one-way data flow.
 Primitive values are simple and safe.
 Objects and arrays must be treated as read-only.
 Events are the only correct way for children to communicate upward.
+
+10. Data Flow Rules — One-Way Parent → Child
+Data Flow Concept
+
+In Lightning Web Components, data should always flow in one direction: from a parent component down to its children.
+
+Passing public (@api) properties from parent to child is how data flows downward.
+Once the child receives data from the parent:
+
+The child must treat it as read-only
+
+The child cannot mutate a parent-owned object or array directly
+
+Attempting to do so results in a runtime error (invalid mutation)
+
+To update such values, the child must notify the parent (via a CustomEvent), and the parent performs the mutation and passes the new value again.
+10.1 Example: One-Way Data Flow with Object Update
+
+Below is a simple demo showing:
+
+a parent holding an object
+
+a child trying (and failing) to update it
+
+the child dispatching an event
+
+the parent updating correctly via a shallow copy
+
+Parent Component — dataFlowParent.js
+import { LightningElement } from 'lwc';
+
+export default class DataFlowParent extends LightningElement {
+    userProfile = {
+        name: 'Jane Doe',
+        role: 'Developer'
+    };
+
+    handleUpdateRequested(event) {
+        // Child requested an update — perform shallow copy here
+        const updatedProfile = {
+            ...this.userProfile,
+            role: event.detail.role
+        };
+        this.userProfile = updatedProfile;
+    }
+}
+Parent Template — dataFlowParent.html
+<template>
+    <c-data-flow-child
+        profile={userProfile}
+        onupdaterequested={handleUpdateRequested}>
+    </c-data-flow-child>
+</template>
+Child Component — dataFlowChild.js
+import { LightningElement, api } from 'lwc';
+
+export default class DataFlowChild extends LightningElement {
+    @api profile;
+
+    requestRoleChange() {
+        // Send a CustomEvent upward
+        this.dispatchEvent(new CustomEvent('updaterequested', {
+            detail: { role: 'Senior Developer' },
+            bubbles: true,
+            composed: true
+        }));
+    }
+}
+Child Template — dataFlowChild.html
+<template>
+    <p>User: {profile.name}</p>
+    <p>Role: {profile.role}</p>
+
+    <lightning-button
+        label="Promote to Senior"
+        onclick={requestRoleChange}>
+    </lightning-button>
+</template>
+Explanation
+
+Parent holds the source of truth — userProfile
+
+The parent passes it to the child using profile={userProfile}
+
+The child renders the values, but does not mutate them directly
+
+The child dispatches a CustomEvent when it wants something changed
+
+The parent’s handler (handleUpdateRequested) performs a shallow copy update and reassigns a new object
+
+LWC reactivity picks up the new reference and updates the UI accordingly
+
+This pattern ensures one-way downward data flow and controlled mutation via parent logic.
+
+10.2 What Happens if You Try to Mutate the Parent Data Directly
+
+In LWC, objects and arrays passed from a parent are wrapped in a proxy.
+Direct mutation in the child like:
+this.profile.role = 'Senior Developer';
+will throw:
+Uncaught Error: Invalid mutation: Cannot set "role" on "[object Object]".
+This prevents untracked state changes and enforces predictable data flow.
+10.3 Best Practice Summary (for Data Flow)
+
+Always treat parent data as read-only in children
+
+To update any data owned by the parent:
+
+the child should emit an event
+
+the parent should perform the mutation using a shallow copy
+
+This pattern guarantees:
+
+one-way data flow
+
+predictable UI updates
+
+no mutation side-effects
+10.4 Bonus Tip (Lean Design)
+
+When possible, prefer passing primitive values instead of objects/arrays, because:
+
+primitives are simpler to track
+
+shape changes to objects/arrays may break consumers
+
+standard HTML attributes only accept primitives
+
+This is recommended by the LWC team to reduce complexity.
+11. Calling JavaScript Methods on Child Components
+
+Lightning Web Components allow a parent component to call public JavaScript methods defined in a child component.
+
+This is useful when the parent needs to:
+
+trigger behavior
+
+reset internal state
+
+perform an action that is not data-driven
+
+11.1 Exposing a Public Method in a Child
+Child Component (JavaScript)
+import { LightningElement, api } from 'lwc';
+
+export default class PublicMethodChild extends LightningElement {
+    counter = 0;
+
+    @api
+    incrementCounter() {
+        this.counter += 1;
+    }
+
+    @api
+    resetCounter() {
+        this.counter = 0;
+    }
+}
+Child Template (HTML)
+<p>Internal Counter: {counter}</p>
+Explanation
+
+The @api decorator can be applied to methods, not just properties.
+
+When applied to a method:
+
+it becomes publicly accessible
+
+parent components can call it imperatively
+
+This exposes behavior, not data.
+
+11.2 Calling a Child Method from the Parent
+Parent Template (HTML)
+<lightning-button
+    label="Increment Child Counter"
+    onclick={handleIncrement}>
+</lightning-button>
+
+<c-public-method-child></c-public-method-child>
+Parent Component (JavaScript)
+handleIncrement() {
+    const child = this.template.querySelector('c-public-method-child');
+    child.incrementCounter();
+}
+Explanation
+
+The parent:
+
+Locates the child using this.template.querySelector
+
+Calls the public method directly on the child instance
+
+This is an imperative call, not reactive data binding.
+
+11.3 Why and When to Use Public Methods
+
+Public methods should be used when:
+
+the parent needs to trigger an action
+
+the action is not tied to data changes
+
+the child manages its own internal state
+
+Examples include:
+
+resetting a form
+
+starting or stopping an animation
+
+refreshing internal calculations
+
+11.4 Important Rules and Anti-Patterns
+❌ Anti-Pattern: Mutating Child State Directly
+child.counter = 10;
+This bypasses encapsulation and should never be done.
+
+❌ Anti-Pattern: Calling Non-@api Methods
+
+Only methods explicitly marked with @api are accessible.
+
+11.5 Relationship to One-Way Data Flow
+
+Calling a public method:
+
+does NOT break one-way data flow
+
+does NOT mutate parent data
+
+allows controlled interaction with child behavior
+
+Key distinction:
+
+Properties pass data downward
+
+Events request changes upward
+
+Public methods invoke child behavior
+
+11.6 Final Mental Model
+
+Use @api properties to pass data
+
+Use CustomEvent to communicate upward
+
+Use @api methods to invoke child behavior
+
+Each mechanism has a distinct purpose and should not be mixed.

@@ -1,0 +1,28 @@
+<template>
+    <div class="slds-box slds-theme_info">
+        <p class="slds-text-title_caps">Data Flow Rule Demo</p>
+
+        <!-- Display parent-owned data -->
+        <p><strong>Name:</strong> {profile.name}</p>
+        <p><strong>Role:</strong> {profile.role}</p>
+
+        <!--
+            TEACHING POINT:
+            - Buttons do NOT mutate data
+            - They REQUEST updates via events
+        -->
+        <div class="slds-m-top_small">
+            <lightning-button
+                label="Request Promotion"
+                onclick={requestPromotion}
+                class="slds-m-right_x-small">
+            </lightning-button>
+
+            <lightning-button
+                label="Reset Role"
+                onclick={requestReset}
+                variant="neutral">
+            </lightning-button>
+        </div>
+    </div>
+</template>

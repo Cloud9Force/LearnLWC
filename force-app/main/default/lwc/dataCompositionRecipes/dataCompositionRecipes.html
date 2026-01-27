@@ -76,6 +76,59 @@
             </div>
 
         </div>
+            !-- =========================================================
+        DATA FLOW RULES DEMO (One-Way Parent → Child)
+        ========================================================= -->
+        <section class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+
+            <!--
+                TEACHING POINT:
+                - Getter below updates automatically when userProfile changes
+                - Proves reactivity via reference change
+            -->
+            <p class="slds-text-heading_small slds-m-bottom_x-small">
+                Reactive Summary (Parent Getter):
+            </p>
+            <p class="slds-text-body_regular slds-m-bottom_small">
+                {formattedProfileSummary}
+            </p>
+
+            <c-data-flow-child
+                profile={userProfile}
+                onupdaterequested={handleProfileUpdateRequest}>
+            </c-data-flow-child>
+
+        </section>
+
+            <!-- =========================================================
+            CALLING CHILD JAVASCRIPT METHODS (@api methods)
+            ========================================================= -->
+        <section class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+
+            <p class="slds-text-heading_small slds-m-bottom_small">
+                Parent Calling Child JavaScript Methods
+            </p>
+
+            <!-- Parent buttons -->
+            <div class="slds-m-bottom_small">
+                <lightning-button
+                    label="Increment Child Counter"
+                    onclick={handleIncrement}
+                    class="slds-m-right_x-small">
+                </lightning-button>
+
+                <lightning-button
+                    label="Reset Child Counter"
+                    onclick={handleReset}
+                    variant="neutral">
+                </lightning-button>
+            </div>
+
+            <!-- Child instance -->
+            <c-public-method-child></c-public-method-child>
+
+        </section>
+
 
         <!-- Trailhead-style View Source Footer -->
         <c-view-source source="lwc/dataCompositionRecipes" slot="footer">
