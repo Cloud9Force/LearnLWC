@@ -1,0 +1,62 @@
+<template>
+    <lightning-card title="Dynamic Components – Lifecycle & Decisions">
+
+        <!-- ===============================
+             STATUS
+             =============================== -->
+        <p class="slds-text-body_small slds-m-bottom_small">
+            <strong>Status:</strong> {statusMessage}
+        </p>
+
+        <!-- ===============================
+             DYNAMIC CONTROLS
+             =============================== -->
+        <div class="slds-m-bottom_medium">
+            <p class="slds-text-body_small slds-m-bottom_small">
+                <strong>Last event from child:</strong>
+                {lastEventMessage}
+            </p>
+            <lightning-button
+                label="Create Dynamic Child"
+                onclick={handleCreateDynamic}
+                class="slds-m-right_x-small">
+            </lightning-button>
+            
+            <lightning-button
+                label="Remove Dynamic Child"
+                onclick={handleRemoveDynamic}
+                variant="destructive">
+            </lightning-button>
+        </div>
+
+        <!-- ===============================
+             DYNAMIC INSERTION POINT
+             =============================== -->
+        <div class="dynamic-container slds-m-bottom_medium"></div>
+
+        <hr />
+
+        <!-- ===============================
+             DECLARATIVE COMPARISON - A component is either declarative OR dynamic. Never both.
+             =============================== -->
+        <div class="slds-m-bottom_small">
+            <lightning-button
+                label="Toggle Declarative Child (if:true)"
+                onclick={handleToggleDeclarative}>
+            </lightning-button>
+        </div>
+
+        <template if:true={showDeclarative}>
+            <c-dynamic-simple-child
+                message="I am a declarative component"
+                titlemessage="I am a declarative component"
+                onnotify={handleDeclarativeNotifyEvent}>
+            </c-dynamic-simple-child>
+        </template>
+
+        <p class="slds-text-body_small slds-text-color_weak slds-m-top_small">
+            Notice: declarative components clean up automatically.
+        </p>
+
+    </lightning-card>
+</template>

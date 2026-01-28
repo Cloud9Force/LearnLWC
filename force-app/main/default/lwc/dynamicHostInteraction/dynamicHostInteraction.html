@@ -1,0 +1,29 @@
+<template>
+    <lightning-card title="Dynamic Components – Interaction">
+
+        <div class="slds-m-bottom_small">
+            <lightning-button
+                label="Create & Interact"
+                onclick={handleCreateAndInteract}>
+            </lightning-button>
+        </div>
+
+        <p class="slds-text-body_small slds-m-bottom_small">
+            <strong>Last event from child:</strong>
+            {lastEventMessage}
+        </p>
+
+        <!--
+            ========================================================
+            DYNAMIC INSERTION POINT
+            ========================================================
+        -->
+        <div class="dynamic-container"></div>
+
+        <p class="slds-text-body_small slds-m-top_small slds-text-color_weak">
+            Notice: properties and events are wired manually.
+        </p>
+        <c-view-source source="lwc/dynamicHostInteraction" slot="footer">Dynamic Components – Interaction</c-view-source>
+
+    </lightning-card>
+</template>

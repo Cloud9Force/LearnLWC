@@ -1,0 +1,14 @@
+<template>
+    <!--
+    Shadow DOM encapsulation
+    Why parent CSS cannot style child
+    Why DOM isolation matters
+    Try styling .inner from a parent component
+    It will not work
+    Encapsulation is enforced
+    -->
+    <div class="inner">
+        <p>Shadow DOM content. Is not stykled by Parent CSS but can be styled by Child CSS only.</p>
+        <p>Parent CSS cannot cross the Shadow DOM boundary.</p>
+    </div>
+</template>
