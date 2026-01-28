@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="JavaScript Properties vs HTML Attributes" icon-name="custom:custom54">
+
+        <!-- =====================================================
+             EXAMPLE 1: STATIC HTML ATTRIBUTES
+             ===================================================== -->
+        <!--
+            IMPORTANT:
+            - HTML attributes are ALWAYS STRINGS
+            - Even if it looks like a boolean, it starts as a string
+        -->
+        <c-props-vs-attributes-child
+            message="Passed as HTML attribute"
+            is-active>
+        </c-props-vs-attributes-child>
+
+        <hr />
+
+        <!-- =====================================================
+             EXAMPLE 2: DYNAMIC JAVASCRIPT PROPERTIES
+             ===================================================== -->
+        <!--
+            IMPORTANT:
+            - Values inside {} are JavaScript expressions
+            - Types (boolean, number, object) are preserved
+        -->
+        <c-props-vs-attributes-child
+            message={dynamicMessage}
+            is-active={dynamicActive}>
+        </c-props-vs-attributes-child>
+        <c-view-source source="lwc/propsVsAttributesParent" slot="footer">JavaScript Properties vs HTML Attributes</c-view-source>
+    </lightning-card>
+</template>

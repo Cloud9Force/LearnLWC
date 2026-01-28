@@ -1,0 +1,27 @@
+<template>
+    <div class="slds-box slds-theme_default">
+
+        <!-- Layout responsibility -->
+        <p class="slds-text-title_caps">{title}</p>
+
+        <p class="slds-text-body_small slds-m-bottom_small">
+            {description}
+        </p>
+
+        <!-- Status display (derived from parent state) -->
+        <p class="slds-text-body_small slds-m-bottom_small">
+            <strong>Status:{status}</strong> 
+        </p>
+
+        <!-- Slot for extensibility -->
+        <slot></slot>
+
+        <!-- Action (intent only) -->
+        <lightning-button
+            label="Request Action"
+            onclick={handleActionClick}
+            class="slds-m-top_small">
+        </lightning-button>
+
+    </div>
+</template>

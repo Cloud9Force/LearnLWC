@@ -1,0 +1,42 @@
+<template>
+    <div class="slds-box slds-theme_default">
+        <p class="slds-text-title_caps">Getter & Setter Child</p>
+
+        <p>
+            <strong>Count:</strong> {count}
+        </p>
+
+        <p>
+            <strong>Doubled (computed):</strong> {doubledCount}
+            <!-- Getter runs when the value is read. UI always reads a clean, safe value; internal storage stays private. -->
+        </p>
+    </div>
+
+    <div class="slds-box slds-theme_default">
+        <p class="slds-text-title_caps">
+            Getter & Setter – Advanced Demo
+        </p>
+
+        <p>
+            <strong>Label:</strong> {label}
+        </p>
+
+        <p>
+            <strong>Is Active:</strong> {isActive}
+        </p>
+
+        <p>
+            <strong>Status (computed):</strong> {statusText}
+        </p>
+    </div>
+
+    <div class="slds-box slds-theme_default">
+        <p class="slds-text-title_caps">
+            Object Normalization Demo
+        </p>
+
+        <p><strong>Title:</strong> {title}</p>
+        <p><strong>Count:</strong> {count}</p>
+        <p><strong>Status:</strong> {statusText}</p>
+    </div>
+</template>

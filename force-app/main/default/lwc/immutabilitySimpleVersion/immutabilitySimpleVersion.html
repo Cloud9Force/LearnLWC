@@ -1,0 +1,40 @@
+<template>
+    <div class="slds-box slds-theme_inverse">
+        <p class="slds-text-title_caps">Immutability Simple Version</p>
+
+        <div class="slds-m-vertical_medium">
+            <lightning-button
+                label="Update Object and Array"
+                onclick={handleUpdate}
+                class="slds-m-right_x-small"
+            ></lightning-button>
+            <lightning-button
+                label="Reset"
+                onclick={handleReset}
+                variant="neutral"
+            ></lightning-button>
+        </div>
+
+        <div class="slds-m-top_medium">
+            <p class="slds-text-title_caps">Original Object</p>
+            <pre>{originalObjectJson}</pre>
+        </div>
+
+        <div class="slds-m-top_medium">
+            <p class="slds-text-title_caps">Original Array</p>
+            <pre>{originalArrayJson}</pre>
+        </div>
+
+        <template if:true={showUpdated}>
+            <div class="slds-m-top_medium">
+                <p class="slds-text-title_caps">Updated Object</p>
+                <pre>{updatedObjectJson}</pre>
+            </div>
+
+            <div class="slds-m-top_medium">
+                <p class="slds-text-title_caps">Updated Array</p>
+                <pre>{updatedArrayJson}</pre>
+            </div>
+        </template>
+    </div>
+</template>

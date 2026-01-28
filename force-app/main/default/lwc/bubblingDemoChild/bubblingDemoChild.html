@@ -1,0 +1,21 @@
+<template>
+    <div class="slds-box slds-theme_info">
+        <p class="slds-text-title_caps">Child: Emit Event</p>
+        <div class="slds-m-top_small">
+            <lightning-button
+                class="slds-m-right_x-small"
+                label="bubbles=false, composed=false"
+                onclick={handleNoBubbleNoComposed}
+            ></lightning-button>
+            <lightning-button
+                class="slds-m-right_x-small"
+                label="bubbles=true, composed=false"
+                onclick={handleBubbleOnly}
+            ></lightning-button>
+            <lightning-button
+                label="bubbles=true, composed=true"
+                onclick={handleBubbleAndComposed}
+            ></lightning-button>
+        </div>
+    </div>
+</template>

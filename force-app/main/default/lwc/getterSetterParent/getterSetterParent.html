@@ -1,0 +1,58 @@
+<template>
+    <lightning-card title="Getters & Setters Demo" icon-name="custom:custom64">
+
+        <!-- =====================================================
+             EXAMPLE 1: HTML ATTRIBUTE (string)
+             ===================================================== -->
+        <!--
+             Whenever the parent sets a value:This is where you should:
+                convert types
+                validate input
+                normalize values
+                count="10" arrives as STRING
+                setter converts it to a number
+        -->
+        <c-getter-setter-child count="10"></c-getter-setter-child>
+
+        <hr />
+
+        <!-- =====================================================
+             EXAMPLE 2: JAVASCRIPT PROPERTY (number)
+             ===================================================== -->
+        <!--
+            count={dynamicCount} arrives as NUMBER
+            setter still runs
+            Whenever the parent sets a value:
+        -->
+        <c-getter-setter-child count={dynamicCount}></c-getter-setter-child>
+
+    </lightning-card>
+    <lightning-card title="Getter & Setter – Real World Usage">
+
+        <!-- =====================================================
+             HTML ATTRIBUTE (STRING)
+             ===================================================== -->
+        <c-getter-setter-child
+            label="   html attribute label   "
+            is-active>
+        </c-getter-setter-child>
+
+        <hr />
+
+        <!-- =====================================================
+             JAVASCRIPT PROPERTY (TYPED)
+             ===================================================== -->
+        <c-getter-setter-child
+            label={dynamicLabel}
+            is-active={dynamicActive}>
+        </c-getter-setter-child>
+
+    </lightning-card>
+    <lightning-card title="Object @api Normalization">
+
+        <c-getter-setter-child
+            config={rawConfig}>
+        </c-getter-setter-child>
+
+    </lightning-card>
+</template>

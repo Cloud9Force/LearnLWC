@@ -1,0 +1,75 @@
+<template>
+    <div class="slds-box slds-theme_default slds-m-bottom_medium">
+
+        <!-- ===============================
+             DEFAULT SLOT WITH SLOTCHANGE
+             =============================== -->
+        <p class="slds-text-title_caps">Default Slot</p>
+
+        <div class="slds-box slds-theme_shade slds-m-bottom_small">
+            <slot onslotchange={handleSlotChange}>
+                <p>No default content provided.</p>
+            </slot>
+        </div>
+
+        <!-- ===============================
+             SLOTCHANGE UI FEEDBACK
+             =============================== -->
+        <div class="slds-text-body_small slds-m-bottom_medium">
+            <p><strong>Slot Status:</strong></p>
+            <p>Assigned node count: {slotNodeCount}</p>
+
+            <template if:true={slotNodeNames.length}>
+                <p>Assigned node types:</p>
+                <ul class="slds-list_dotted">
+                    <template for:each={slotNodeNames} for:item="node">
+                        <li key={node}>{node}</li>
+                    </template>
+                </ul>
+            </template>
+        </div>
+        <!-- ===============================
+             NEW: ACCESS SLOTTED ELEMENTS
+             =============================== -->
+             <div class="slds-text-body_small slds-m-bottom_medium">
+                <p><strong>Accessed Slotted Elements:</strong></p>
+    
+                <template if:true={slottedElementInfo.length}>
+                    <ul class="slds-list_dotted">
+                        <template for:each={slottedElementInfo} for:item="el">
+                            <li key={el.tag}>
+                                <strong>{el.tag}</strong>
+                                <template if:true={el.text}>
+                                    — "{el.text}"
+                                </template>
+                            </li>
+                        </template>
+                    </ul>
+                </template>
+    
+                <template if:false={slottedElementInfo.length}>
+                    <p>No elements passed into slot.</p>
+                </template>
+            </div>
+
+        <!-- ===============================
+             NAMED SLOTS
+             =============================== -->
+        <p class="slds-text-title_caps">Named Slots</p>
+
+        <div class="slds-m-bottom_small">
+            <strong>Header:</strong>
+            <slot name="header">
+                <p>Default Header</p>
+            </slot>
+        </div>
+
+        <div class="slds-m-bottom_small">
+            <strong>Footer:</strong>
+            <slot name="footer">
+                <p>Default Footer</p>
+            </slot>
+        </div>
+
+    </div>
+</template>

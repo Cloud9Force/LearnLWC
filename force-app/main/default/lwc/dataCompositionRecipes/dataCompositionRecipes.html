@@ -13,8 +13,8 @@
                     - Primitives are safe by value.
                 -->
                 <c-primitive-child
-                    heading="Static Primitive"
-                    message="Hello from Parent (static)">
+                    heading="Static Primitive Passed to Child"
+                    message="Hello from Parent to Child api property (static)">
                 </c-primitive-child>
             </div>
 
@@ -23,9 +23,12 @@
             <!-- ==================== -->
             <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
                 <c-primitive-child
-                    heading="Dynamic Primitive"
+                    heading="Dynamic Primitive Passed to Child"
                     message={dynamicMessage}>
                 </c-primitive-child>
+                <p class="slds-text-body_small slds-m-top_x-small">
+                    Dynamic message from Parent to Child api property (dynamic).
+                </p>
             </div>
 
             <!-- ==================== -->
@@ -56,6 +59,13 @@
             <!-- Immutability Demo (Shallow Copy) -->
             <!-- ==================== -->
             <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                <c-immutability-simple-version
+                    original-object={accountObject}
+                    original-array={itemList}>
+                </c-immutability-simple-version>
+            </div>
+
+            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
                 <!--
                     TEACHING:
                     - Show immutability anti-pattern and correct pattern with shallow copy.
@@ -66,74 +76,307 @@
                 </c-immutability-demo-child>
             </div>
 
-            <!-- ==================== -->
-            <!-- Child to Parent Event -->
-            <!-- ==================== -->
-            <div class="slds-col slds-size_1-of-1">
+            SPREAD OPERATOR PLAYGROUND
+            ========================================================= -->
+            <lightning-card title="Spread Operator Playground" icon-name="custom:custom14">
+                <section class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                <c-spread-playground></c-spread-playground>
+            </section>
+            </lightning-card>
+            </div>§
+        </lightning-card>
+        <!-- =========================================================
+        DATA FLOW RULES DEMO (One-Way Parent → Child)
+        ========================================================= -->
+        <lightning-card title="Data Flow Rules Demo (One-Way Parent → Child)" icon-name="custom:custom14">
+            <section class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+
+                <!--
+                    TEACHING POINT:
+                    - Getter below updates automatically when userProfile changes
+                    - Proves reactivity via reference change
+                -->
+                <p class="slds-text-heading_small slds-m-bottom_x-small">
+                    Reactive Summary (Parent Getter - Shallow Copy):
+                </p>
+                <p class="slds-text-body_regular slds-m-bottom_small">
+                    {formattedProfileSummary}
+                </p>
+
+                <p class="slds-text-heading_small slds-m-bottom_x-small">
+                    Reactive Summary (Parent Getter - Deep Copy):
+                </p>
+                <p class="slds-text-body_regular slds-m-bottom_small">
+                    {formattedProfileSummaryDeep}
+                </p>
+
+                <c-data-flow-child
+                    profile-shallow={userProfile}
+                    profile-deep={userProfileDeep}
+                    onupdaterequested={handleProfileUpdateRequest}>
+                </c-data-flow-child>
+
+            </section>
+        </lightning-card>
+           <!-- =========================================================
+            CALLING CHILD JAVASCRIPT METHODS (@api)
+            ========================================================= -->
+        <lightning-card title="Calling Child JavaScript Methods (@api)" icon-name="custom:custom14">
+            <section class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+
+                <p class="slds-text-heading_small slds-m-bottom_small">
+                    Parent Calling Child JavaScript Methods
+                </p>
+
+                <div class="slds-m-bottom_small">
+                    <lightning-button
+                        label="Increment (+1)"
+                        onclick={handleIncrement}
+                        class="slds-m-right_x-small">
+                    </lightning-button>
+
+                    <lightning-button
+                        label="Add +5 (Parameter)"
+                        onclick={handleAddFive}
+                        class="slds-m-right_x-small">
+                    </lightning-button>
+
+                    <lightning-button
+                        label="Read Counter (Return Value)"
+                        onclick={handleReadCounter}
+                        variant="neutral">
+                    </lightning-button>
+                    <lightning-button
+                        label="Increment After 2s (Async-await)"
+                        onclick={handleAsyncIncrement}
+                        variant="brand"
+                        class="slds-m-top_x-small">
+                    </lightning-button>
+
+                </div>
+
+                <p class="slds-text-body_small slds-m-bottom_small">
+                    Value read from child: {lastReadCounter}
+                </p>
+
+                <c-public-method-child></c-public-method-child>
+
+            </section>
+        </lightning-card>
+        <!-- =========================================================
+            SPREAD PROPERTIES DEMO
+            ========================================================= -->
+        <lightning-card title="Spread Properties from Parent To Child using Demo" icon-name="custom:custom14">
+            <section class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+
+                <p class="slds-text-heading_small slds-m-bottom_small">
+                    Spread Properties from Parent To Child using Demo
+                </p>
+                <p class="slds-text-heading_small slds-m-bottom_small">
+                    Property defined in Parent heading: {spreadExample.heading}
+                </p>
+                <p class="slds-text-heading_small slds-m-bottom_small">
+                    Property defined in Parent message : {spreadExample.message}
+                </p>
+                <p class="slds-text-heading_small slds-m-bottom_small">
+                    Below is the same example but calling Child Using input-props attribute
+                </p>
+                <c-spread-props-child
+                    input-props={spreadExample}>
+                </c-spread-props-child>
+                <p class="slds-text-heading_small slds-m-bottom_small">
+                    Below is the same example but calling Child Using lwc:spread directive
+                </p>
+                <c-spread-props-child
+                    lwc:spread={spreadExample}>
+                </c-spread-props-child>
+                <c-view-source source="lwc/spreadPropsChild" slot="footer">
+                    Pass data to a child component using lwc:spread directive
+                </c-view-source>
+
+            </section>  
+        </lightning-card>
+        <lightning-card title="ApiSpread Parent Component" icon-name="custom:custom14">
+            <div class="slds-var-m-around_medium">
+                <lightning-input
+                    name="firstName"
+                    label="First Name"
+                    onchange={handleChangeSpread}
+                    value={props.firstName}
+                ></lightning-input>
+                <lightning-input
+                    name="lastName"
+                    label="Last Name"
+                    onchange={handleChangeSpread}
+                    value={props.lastName}
+                ></lightning-input>
+                <c-spread-prop-child lwc:spread={props}></c-spread-prop-child>
+            </div>
+    
+            <c-view-source source="lwc/spreadPropChild" slot="footer">
+                Pass data to a child component using lwc:spread directive
+            </c-view-source>
+        </lightning-card>
+
+
+        <!-- =========================================================
+            SPREAD PROPERTIES – ADVANCED RULES
+            ========================================================= -->
+        <lightning-card title="Spread Properties – Advanced Rules" icon-name="custom:custom14">
+            <section class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+
+                <p class="slds-text-heading_small slds-m-bottom_small">
+                    Spread Properties – Advanced Rules
+                </p>
+
+                <p class="slds-text-body_small slds-m-bottom_x-small">
+                    Event status (explicit custom handler via onchildclicked): {spreadEventMessage}
+                </p>
+                <p class="slds-text-body_small slds-m-bottom_x-small">
+                    Event status (custom via lwc:spread only): {spreadOnlyMessage}
+                </p>
+                <p class="slds-text-body_small slds-m-bottom_x-small">
+                    Event status (onclick via lwc:spread): {spreadDomMessage}
+                </p>
+
+                <!--
+                    TEACHING POINTS:
+                    1. title and disabled are reflected HTML attributes
+                    2. lwc:spread is applied LAST
+                    3. Custom event handlers in lwc:spread do NOT bind
+                    4. DOM onclick in lwc:spread DOES bind
+                    5. Use explicit onchildclicked for custom events
+                -->
+                <c-spread-reflect-child
+                    title="Explicit Attribute (will be overridden)"
+                    lwc:spread={spreadProps}
+                    onchildclicked={handleSpreadChildClick}>
+                </c-spread-reflect-child>
+                <c-spread-reflect-child
+                    class="slds-m-top_small"
+                    lwc:spread={spreadProps}>
+                </c-spread-reflect-child>
+
+            </section>
+            <c-view-source source="lwc/spreadReflectChild" slot="footer">
+                Pass data and event to a child component using lwc:spread directive
+            </c-view-source>
+        </lightning-card>
+
+        <!-- =========================================================
+            BUBBLES + COMPOSED DEMO (GRANDPARENT)
+            ========================================================= -->
+        <lightning-card title="Bubbles + Composed Demo (Grandparent)" icon-name="custom:custom14">
+            <section class="slds-col slds-size_1-of-1 slds-m-bottom_medium slds-box">
+                <p class="slds-text-heading_small">Bubbles + Composed Demo (Grandparent)</p>
+                <c-bubbling-demo-parent onbubbledemo={handleBubblingDemo}></c-bubbling-demo-parent>
+                <div class="slds-m-top_small slds-border_top slds-p-top_small">
+                    <p class="slds-text-title_caps">Grandparent Received</p>
+                    <pre class="slds-text-body_small slds-scrollable_y">{lastBubblingDemo}</pre>
+                </div>
+            </section>
+
+            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium slds-box slds-theme_shade">
+                <p class="slds-text-title_caps slds-m-bottom_small">Parent: Listening to Child Event</p>
                 <c-child-to-parent-child
                     onnotifyparent={handleChildNotification}>
                 </c-child-to-parent-child>
+                <div class="slds-m-top_small slds-border_top slds-p-top_small">
+                    <p class="slds-text-title_caps">Last Child Event Detail</p>
+                    <pre class="slds-text-body_small slds-scrollable_y">{lastChildNotification}</pre>
+                </div>
             </div>
+            <c-view-source source="lwc/bubblingDemoParent" slot="footer">
+                Bubbles + Composed Demo (Grandparent)
+            </c-view-source>
+        </lightning-card>
 
-        </div>
-            !-- =========================================================
-        DATA FLOW RULES DEMO (One-Way Parent → Child)
-        ========================================================= -->
-        <section class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
 
-            <!--
-                TEACHING POINT:
-                - Getter below updates automatically when userProfile changes
-                - Proves reactivity via reference change
-            -->
-            <p class="slds-text-heading_small slds-m-bottom_x-small">
-                Reactive Summary (Parent Getter):
-            </p>
-            <p class="slds-text-body_regular slds-m-bottom_small">
-                {formattedProfileSummary}
-            </p>
-
-            <c-data-flow-child
-                profile={userProfile}
-                onupdaterequested={handleProfileUpdateRequest}>
-            </c-data-flow-child>
-
-        </section>
-
-            <!-- =========================================================
-            CALLING CHILD JAVASCRIPT METHODS (@api methods)
+        <!-- =========================================================
+            DYNAMIC EVENT LISTENERS demo (lwc:on)
             ========================================================= -->
-        <section class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+        <lightning-card title="Dynamic Event Listeners demo (lwc:on)" icon-name="custom:custom14">
+            <section class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                 <p class="slds-text-heading_small">Dynamic Event Listener Demo</p>
 
-            <p class="slds-text-heading_small slds-m-bottom_small">
-                Parent Calling Child JavaScript Methods
+            <p class="slds-text-body_regular slds-m-bottom_small">
+                Last Event: {lastDynamicEvent}
             </p>
 
-            <!-- Parent buttons -->
-            <div class="slds-m-bottom_small">
-                <lightning-button
-                    label="Increment Child Counter"
-                    onclick={handleIncrement}
-                    class="slds-m-right_x-small">
-                </lightning-button>
+            <c-dynamic-event-child
+                name={dynamicChildName}
+                age={dynamicChildAge}
+                onchildinitialized={handleChildInitialized}
+                onchildupdated={handleChildUpdated}>
+            </c-dynamic-event-child>
+                                                        </section>
+            <c-view-source source="lwc/dynamicEventChild" slot="footer">
+                Dynamic Event Listeners demo (lwc:on)
+            </c-view-source>
+        </lightning-card>
 
-                <lightning-button
-                    label="Reset Child Counter"
-                    onclick={handleReset}
-                    variant="neutral">
-                </lightning-button>
-            </div>
+        
+        
+        <!-- =========================================================
+            SLOTS DEMO (DEFAULT & NAMED)
+            ========================================================= -->
+        <lightning-card title="Slots Demonstration" icon-name="custom:custom14">
+            <section class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
 
-            <!-- Child instance -->
-            <c-public-method-child></c-public-method-child>
+                <p class="slds-text-heading_small slds-m-bottom_small">Slots Demonstration</p>
 
-        </section>
+                <!-- Example 1: Default Slot -->
+                <c-slots-child>
+                    <p>This paragraph goes into the default (unnamed) slot!</p>
+                    <lightning-button label="Click me in default slot"></lightning-button>
+                </c-slots-child>
 
+                <!-- Example 2: Named Slots -->
+                <c-slots-child>
+                    <!-- Header slot content -->
+                    <div slot="header">
+                        <p class="slds-text-color_brand">Content for the Header Slot</p>
+                    </div>
 
-        <!-- Trailhead-style View Source Footer -->
-        <c-view-source source="lwc/dataCompositionRecipes" slot="footer">
-            Combine multiple children to illustrate data passing patterns including iteration
-            and immutability/shallow copy patterns.
-        </c-view-source>
-    </lightning-card>
+                    <!-- Footer slot content -->
+                    <div slot="footer">
+                        <p class="slds-text-color_success">Content for the Footer Slot</p>
+                    </div>
+                </c-slots-child>
+
+            </section>
+
+            <!-- Trailhead-style View Source Footer -->
+            <c-view-source source="lwc/slotsChild" slot="footer">
+                Slots Demonstration
+            </c-view-source>
+        </lightning-card>
+        <lightning-card title="Best Composition – Parent Owns State" icon-name="custom:custom14">
+            <!-- =========================================================
+                BEST PRACTICES FOR COMPONENT COMPOSITION
+                ========================================================= -->
+            <section class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+
+                <p class="slds-text-heading_small slds-m-bottom_small">
+                    Best Practices for Component Composition
+                </p>
+
+                <c-best-composition-child
+                    title="Well-Composed Child Component"
+                    description="This child receives data, displays it, and emits intent."
+                    status={compositionStatus}
+                    onactionrequested={handleCompositionAction}>
+
+                    <!-- Slot used for layout extension -->
+                    <p class="slds-text-body_small slds-text-color_success">
+                        This content is injected via a slot.
+                    </p>
+
+                </c-best-composition-child>
+
+            </section>
+            <c-view-source source="lwc/bestCompositionChild" slot="footer">
+                Best Composition – Parent Owns State
+            </c-view-source>
+        </lightning-card>
 </template>

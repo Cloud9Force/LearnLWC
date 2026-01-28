@@ -6,7 +6,8 @@ export default class DataFlowChild extends LightningElement {
        READ-ONLY INPUT FROM PARENT
        ============================================================ */
 
-    @api profile;
+    @api profileShallow;
+    @api profileDeep;
 
     /**
      * ❌ ANTI-PATTERN (DO NOT DO THIS)
@@ -18,30 +19,66 @@ export default class DataFlowChild extends LightningElement {
     /**
      * ✅ Request promotion
      */
-    requestPromotion() {
+    // Helper: send "what to update" + "which target"
+    fireUpdate(target, detail) {
         this.dispatchEvent(
             new CustomEvent('updaterequested', {
-                detail: { role: 'Senior Developer' },
+                detail: { target, ...detail },
                 bubbles: true,
                 composed: true
             })
         );
     }
 
-    /**
-     * ✅ Request role reset (second update path)
-     *
-     * TEACHING POINT:
-     * - Child can request DIFFERENT updates
-     * - Parent still controls final state
-     */
-    requestReset() {
-        this.dispatchEvent(
-            new CustomEvent('updaterequested', {
-                detail: { role: 'Developer' },
-                bubbles: true,
-                composed: true
-            })
-        );
+    // Shallow: updates name + role (top-level)
+    requestPromotionShallow() {
+        this.fireUpdate('shallow', {
+            role: 'Senior Developer',
+            name: 'Jane Doe (Promoted)'
+        });
+    }
+
+    // Shallow: reset name + role (top-level)
+    requestResetShallow() {
+        this.fireUpdate('shallow', {
+            role: 'Developer Shallow',
+            name: 'Jane Doe'
+        });
+    }
+
+    // Shallow: updates nested field address.city
+    requestCityUpdateShallow() {
+        this.fireUpdate('shallow', { address: { city: 'San Francisco' } });
+    }
+
+    // Shallow: resets nested field address.city
+    requestCityResetShallow() {
+        this.fireUpdate('shallow', { address: { city: 'New York' } });
+    }
+
+    // Deep: updates name + role (top-level)
+    requestPromotionDeep() {
+        this.fireUpdate('deep', {
+            role: 'Senior Developer Deep',
+            name: 'Alex Deep (Promoted)'
+        });
+    }
+
+    // Deep: reset name + role (top-level)
+    requestResetDeep() {
+        this.fireUpdate('deep', {
+            role: 'Developer Deep',
+            name: 'Alex Deep'
+        });
+    }
+
+    // Deep: updates nested field address.city
+    requestCityUpdateDeep() {
+        this.fireUpdate('deep', { address: { city: 'San Francisco' } });
+    }
+
+    // Deep: resets nested field address.city
+    requestCityResetDeep() {
+        this.fireUpdate('deep', { address: { city: 'Chicago' } });
     }
 }

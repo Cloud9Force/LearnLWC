@@ -1,0 +1,34 @@
+<template>
+    <div class="slds-box slds-theme_default">
+
+        <p class="slds-text-title_caps">
+            DOM Attributes vs JavaScript Properties
+        </p>
+
+        <p class="slds-text-body_small slds-m-bottom_small">
+            <strong>Last action:</strong> {lastAction}
+        </p>
+
+        <div class="slds-m-bottom_small">
+            <p>
+                <strong>DOM attribute (getAttribute):</strong>
+                {domAttributeValue}
+            </p>
+
+            <p>
+                <strong>@api property:</strong>
+                {apiPropertyValue}
+            </p>
+        </div>
+
+        <lightning-button
+            label="Call setAttribute('message')"
+            onclick={handleSetAttribute}>
+        </lightning-button>
+
+        <p class="slds-text-body_small slds-m-top_small slds-text-color_weak">
+            Notice how the DOM attribute changes, but the @api property does not.
+        </p>
+
+    </div>
+</template>

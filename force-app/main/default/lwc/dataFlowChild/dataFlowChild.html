@@ -1,26 +1,69 @@
 <template>
     <div class="slds-box slds-theme_info">
-        <p class="slds-text-title_caps">Data Flow Rule Demo</p>
+        <p class="slds-text-title_caps">Child Component - Data Flow Rule Demo Shallow </p>
 
-        <!-- Display parent-owned data -->
-        <p><strong>Name:</strong> {profile.name}</p>
-        <p><strong>Role:</strong> {profile.role}</p>
+        <!-- Display parent-owned data (Shallow) -->
+        <p><strong>Shallow Name:</strong> {profileShallow.name}</p>
+        <p><strong>Shallow Role:</strong> {profileShallow.role}</p>
+        <p><strong>Shallow City:</strong> {profileShallow.address.city}</p>
 
-        <!--
-            TEACHING POINT:
-            - Buttons do NOT mutate data
-            - They REQUEST updates via events
-        -->
         <div class="slds-m-top_small">
             <lightning-button
-                label="Request Promotion"
-                onclick={requestPromotion}
+                label="Shallow: Promotion (Role + Name)"
+                onclick={requestPromotionShallow}
                 class="slds-m-right_x-small">
             </lightning-button>
 
             <lightning-button
-                label="Reset Role"
-                onclick={requestReset}
+                label="Shallow: Reset Role + Name"
+                onclick={requestResetShallow}
+                variant="neutral">
+            </lightning-button>
+        </div>
+        <div class="slds-m-top_small">
+            <lightning-button
+                label="Shallow: City Update (Nested)"
+                onclick={requestCityUpdateShallow}
+                class="slds-m-right_x-small">
+            </lightning-button>
+
+            <lightning-button
+                label="Shallow: Reset City (Nested)"
+                onclick={requestCityResetShallow}
+                variant="neutral">
+            </lightning-button>
+        </div>
+
+        <hr class="slds-m-vertical_medium" />
+        <p class="slds-text-title_caps">Child Component - Data Flow Rule Demo Deep </p>
+        <!-- Display parent-owned data (Deep) -->
+        <p><strong>Deep Name:</strong> {profileDeep.name}</p>
+        <p><strong>Deep Role:</strong> {profileDeep.role}</p>
+        <p><strong>Deep City:</strong> {profileDeep.address.city}</p>
+
+        <div class="slds-m-top_small">
+            <lightning-button
+                label="Deep: Promotion (Role + Name)"
+                onclick={requestPromotionDeep}
+                class="slds-m-right_x-small">
+            </lightning-button>
+
+            <lightning-button
+                label="Deep: Reset Role + Name"
+                onclick={requestResetDeep}
+                variant="neutral">
+            </lightning-button>
+        </div>
+        <div class="slds-m-top_small">
+            <lightning-button
+                label="Deep: City Update (Nested)"
+                onclick={requestCityUpdateDeep}
+                class="slds-m-right_x-small">
+            </lightning-button>
+
+            <lightning-button
+                label="Deep: Reset City (Nested)"
+                onclick={requestCityResetDeep}
                 variant="neutral">
             </lightning-button>
         </div>

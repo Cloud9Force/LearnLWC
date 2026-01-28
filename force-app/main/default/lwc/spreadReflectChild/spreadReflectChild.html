@@ -1,0 +1,14 @@
+<template>
+    <div class="slds-box slds-theme_warning">
+        <p class="slds-text-title_caps">Spread & Attribute Reflection Demo</p>
+
+        <p>Title (reflected attribute): {title}</p>
+        <p>Disabled (reflected attribute): {disabled}</p>
+
+        <lightning-button
+            label="Click Child Button"
+            onclick={handleClick}
+            disabled={disabled}>
+        </lightning-button>
+    </div>
+</template>

@@ -1,9 +1,14 @@
 <template>
-    <div class="slds-box slds-theme_success">
-        <p class="slds-text-title_caps">Child → Parent Communication</p>
-        <lightning-button
-            label="Notify Parent"
-            onclick={notifyParent}>
-        </lightning-button>
-    </div>
+    <lightning-card title="Child → Parent Communication Using Custom Events" icon-name="custom:custom14">
+        <div class="slds-p-around_medium slds-theme_success">
+            <p class="slds-text-title_caps">Child → Parent Communication</p>
+            <lightning-button
+                label="From Child Notify Parent"
+                onclick={notifyParent}>
+            </lightning-button>
+            <p class="slds-m-top_small slds-text-body_small">
+                Click count: {clickCount}
+            </p>
+        </div>
+    </lightning-card>
 </template>

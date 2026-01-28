@@ -480,3 +480,209 @@ Use CustomEvent to communicate upward
 Use @api methods to invoke child behavior
 
 Each mechanism has a distinct purpose and should not be mixed.
+## 12. Spread Properties — Passing Multiple Props Efficiently
+
+In Lightning Web Components, you can group multiple related values into a single object
+and pass them as a single property to a child component.
+
+This pattern is called “spread properties”. While LWC templates do not support
+JavaScript object spread syntax (`{...object}`) directly in HTML,
+you can still achieve the same effect by organizing related properties in an object
+and passing them together.
+
+---
+
+### 12.1 Example: Grouped Props from Parent
+
+### Parent Component (JavaScript)
+
+```js
+spreadExample = {
+    heading: 'Spread Props Demo',
+    message: 'This message came through a grouped props object'
+};
+Parent Template (HTML)
+<c-spread-props-child input-props={spreadExample}></c-spread-props-child>
+Explanation
+
+Here the parent groups two values — heading and message — into a single object
+called spreadExample.
+
+This object is passed to the child component through one @api property,
+which simplifies the interface and reduces template verbosity.
+
+12.2 Child Component Receiving Grouped Props
+Child Component (JavaScript)
+import { LightningElement, api } from 'lwc';
+
+export default class SpreadPropsChild extends LightningElement {
+    @api inputProps = {};
+}
+Child Template (HTML)
+<c-primitive-child
+    message={inputProps.message}
+    heading={inputProps.heading}>
+</c-primitive-child>
+Explanation
+
+Once the grouped object arrives in the child, it can be “spread”
+by assigning its properties to the specific attributes of a deeper child.
+
+This makes code cleaner when many related properties exist,
+and it preserves the one-way data flow pattern.
+
+12.3 When to Use This Pattern
+
+Use grouped prop objects when:
+
+You have many related values to pass to the same child
+
+You want to reduce clutter in parent HTML
+
+You want to create a higher-level API surface for a child
+
+Always remember:
+
+You still must treat non-primitive values as read-only in children
+
+You should not mutate objects passed from parents
+
+12.4 Anti-Patterns
+
+❌ Passing an unstructured object and then mutating it downstream:
+this.inputProps.message = 'Bad mutation';
+This breaks one-way data flow.
+
+❌ Relying on template support for object spreading ({...obj})
+
+LWC templates do not support this syntax.
+
+12.5 Summary
+
+Spread properties help you encapsulate multiple related values into a single object
+for easier and cleaner parent-to-child binding.
+
+This pattern helps maintain structured component APIs and is especially helpful
+when child components need many prop values.
+## 13. Dynamic Event Listeners Using `lwc:on`
+
+This section demonstrates how a parent component can **dynamically listen** to events dispatched by a child component using the `lwc:on` directive.
+
+This pattern allows you to declaratively attach event listeners in the template **without writing imperative event-listener code in JavaScript**, improving readability.
+
+---
+
+### 13.1 Example: Child Dispatches Multiple Events
+
+### Child Component (JavaScript)
+
+```js
+import { LightningElement, api } from 'lwc';
+
+export default class DynamicEventChild extends LightningElement {
+    @api name;
+    @api age;
+
+    connectedCallback() {
+        this.dispatchEvent(
+            new CustomEvent('childinitialized', {
+                detail: { name: this.name, age: this.age },
+                bubbles: true,
+                composed: true
+            })
+        );
+    }
+
+    handleUpdateClick() {
+        this.dispatchEvent(
+            new CustomEvent('childupdated', {
+                detail: { name: 'LWC', age: 8 },
+                bubbles: true,
+                composed: true
+            })
+        );
+    }
+}
+
+Child Template (HTML)
+<p>Name: {name}</p>
+<p>Age: {age}</p>
+
+<lightning-button
+    label="Update Child Data"
+    onclick={handleUpdateClick}>
+</lightning-button>
+
+Explanation
+
+The child component dispatches two distinct events:
+
+childinitialized when it is inserted into the DOM
+
+childupdated when the user clicks a button
+
+Each event carries a detail payload with updated property values.
+
+13.2 Parent Listening Using lwc:on
+Parent Template (HTML)
+<c-dynamic-event-child
+    name={dynamicChildName}
+    age={dynamicChildAge}
+    lwc:onchildinitialized={handleChildInitialized}
+    lwc:onchildupdated={handleChildUpdated}>
+</c-dynamic-event-child>
+
+Parent JavaScript
+handleChildInitialized(event) {
+    const { name, age } = event.detail;
+    this.lastDynamicEvent = `Initialized: ${name}, ${age}`;
+}
+
+handleChildUpdated(event) {
+    const { name, age } = event.detail;
+    this.lastDynamicEvent = `Updated: ${name}, ${age}`;
+}
+
+xplanation
+
+Using the lwc:on directive in the parent template:
+
+attaches event listeners directly in the markup
+
+avoids adding listeners imperatively in JavaScript
+
+works even for events dispatched in lifecycle callbacks
+
+This makes templates cleaner and event wiring more declarative.
+
+13.3 Why Use lwc:on
+
+Use this directive when:
+
+you want to listen to multiple child events declaratively
+
+you want to keep event wiring close to where the child is rendered
+
+you want to avoid addEventListener in connectedCallback
+
+It improves maintainability and makes templates more readable.
+
+13.4 How This Relates to One-Way Data Flow
+
+This pattern does not violate one-way data flow:
+
+child still dispatches events upward
+
+parent still owns data and updates state
+
+events only signal intent or payloads
+
+It’s a declarative event binding, not a data mutation channel.
+
+13.5 Summary
+
+lwc:on[event] lets you bind event handlers in the template
+
+child events can be dispatched in lifecycle callbacks or user actions
+
+parent handles them in JavaScript handlers

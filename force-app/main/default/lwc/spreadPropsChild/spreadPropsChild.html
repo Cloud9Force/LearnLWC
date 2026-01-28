@@ -1,0 +1,31 @@
+<template>
+    <div class="slds-box slds-theme_success">
+        <p class="slds-text-title_caps">Spread Props in Child using lwc:spread</p>
+
+        <!-- Use spread operator to pass multiple properties -->
+        <p class="slds-text-title_caps">Heading from lwc:spread directive: {heading}</p>
+        <p class="slds-text-title_caps">Message from lwc:spread directive: {message}</p>
+    </div>
+    <div class="slds-box slds-theme_success">
+        <p class="slds-text-title_caps">Spread Props in Child using input-props attribute</p>
+
+        <!-- Use spread operator to pass multiple properties -->
+        <p class="slds-text-title_caps">Heading from input-props attribute: {inputProps.heading}</p>
+        <p class="slds-text-title_caps">Message from input-props attribute: {inputProps.message}</p>
+    </div>
+    <div class="slds-box slds-theme_success">
+        <p class="slds-text-title_caps">Below is the same example but calling Grand Child using input-props attribute</p>
+        <c-primitive-child
+            message={inputProps.message}
+            heading={inputProps.heading}>
+        </c-primitive-child>
+    </div>
+    <div class="slds-box slds-theme_success">
+        <p class="slds-text-title_caps">Below is the same example but calling Grand Child using lwc:spread attribute</p>
+        <c-primitive-child
+            message={message}
+            heading={heading}>
+        </c-primitive-child>
+    </div>
+
+</template>
