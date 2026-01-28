@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Filter + List Pattern">
+
+        <!-- ===============================
+             FILTER CONTROLS (INTENT)
+             =============================== -->
+        <section class="filters">
+            <lightning-combobox
+                label="Department"
+                value={selectedDept}
+                options={departmentOptions}
+                onchange={handleDeptChange}>
+            </lightning-combobox>
+
+            <lightning-input
+                label="Search Name"
+                onchange={handleSearchChange}>
+            </lightning-input>
+        </section>
+
+        <!-- ===============================
+             FILTERED LIST (RESULT)
+             =============================== -->
+        <section class="results">
+            <lightning-datatable
+                key-field="id"
+                data={filteredRecords}
+                columns={columns}>
+            </lightning-datatable>
+        </section>
+        <c-view-source source="lwc/patternFilterList" slot="footer"> Pattern Filter List </c-view-source>
+    </lightning-card>
+</template>

@@ -1,0 +1,69 @@
+<template>
+    <lightning-card title="Platform Services Demo">
+
+        <!-- ==========================================
+             MESSAGE SERVICE
+             ========================================== -->
+        <section class="section">
+            <h3>Lightning Message Service</h3>
+
+            <lightning-button
+                label="Publish Message"
+                onclick={publishMessage}>
+            </lightning-button>
+
+            <p>Last received message: {receivedMessage}</p>
+        </section>
+
+        <!-- ==========================================
+             REFRESH
+             ========================================== -->
+        <section class="section">
+            <h3>Lightning Refresh</h3>
+
+            <lightning-button
+                label="Trigger Refresh"
+                onclick={triggerRefresh}>
+            </lightning-button>
+
+            <p>Last refresh time: {lastRefreshTime}</p>
+            <p>Wired User Name (refreshes with LDS): {userName}</p>
+        </section>
+
+        <!-- ==========================================
+             LOGGER
+             ========================================== -->
+        <section class="section">
+            <h3>Lightning Logger</h3>
+
+            <lightning-button
+                label="Log Info"
+                onclick={logInfo}>
+            </lightning-button>
+
+            <lightning-button
+                label="Log Error"
+                onclick={logError}>
+            </lightning-button>
+
+            <p class="slds-m-top_small">
+                Last log: {lastLogLevel} - {lastLogMessage}
+            </p>
+
+            <template if:true={uiLogs}>
+                <div class="slds-m-top_small">
+                    <p><strong>UI Log (for demo):</strong></p>
+                    <ul>
+                        <template for:each={uiLogs} for:item="item">
+                            <li key={item.id}>
+                                [{item.timestamp}] {item.level}: {item.message}
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </template>
+        </section>
+
+    </lightning-card>
+    <c-view-source source="lwc/baseCompPlatformServicesDemo" slot="footer"> Base Component Platform Services Demo </c-view-source>
+</template>

@@ -1,0 +1,46 @@
+<template>
+    <lightning-card title="Slot Container">
+
+        <!-- ============================
+             HEADER SLOT
+             ============================ -->
+        <div class="slds-m-bottom_small">
+            <slot name="header">
+                <!-- Fallback if consumer doesn't provide header -->
+                <h2>Default Header</h2>
+            </slot>
+        </div>
+
+        <!-- ============================
+             ACTIONS SLOT
+             ============================ -->
+        <div class="slds-m-bottom_small">
+            <slot name="actions">
+                <p class="slds-text-body_small">No actions provided.</p>
+            </slot>
+        </div>
+
+        <!-- ============================
+             DEFAULT SLOT (MAIN CONTENT)
+             ============================ -->
+        <div class="body">
+            <slot>
+                <p>No content provided.</p>
+            </slot>
+        </div>
+
+        <!-- ============================
+             FOOTER SLOT
+             ============================ -->
+        <div class="slds-m-top_small">
+            <slot name="footer">
+                <lightning-button
+                    label="Default Action"
+                    onclick={handleDefaultAction}>
+                </lightning-button>
+            </slot>
+        </div>
+
+    </lightning-card>
+    <c-view-source source="lwc/patternSlotContainerAdvanced" slot="footer"> Pattern Slot Container Advanced </c-view-source>
+</template>

@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="DOM Basics – Child Owned Elements">
+
+        <div class="box" lwc:ref="box">
+            I am a DOM element owned by this child component.
+        </div>
+
+        <lightning-button
+            label="Change Text via DOM"
+            onclick={handleDomUpdate}>
+        </lightning-button>
+
+        <p class="status">
+            {status}
+        </p>
+        <div class="child-box">
+            Child DOM element
+        </div>
+
+    </lightning-card>
+</template>

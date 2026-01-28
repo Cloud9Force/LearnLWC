@@ -1,0 +1,35 @@
+<template>
+    <lightning-card title="DOM Ownership Demo" icon-name="custom:custom16">
+
+        <c-dom-intro-basic></c-dom-intro-basic>
+
+        <lightning-button
+            label="Try to Access Child DOM"
+            onclick={tryAccessChildDom}>
+        </lightning-button>
+
+        <p>{result}</p>
+
+    </lightning-card>
+
+    <lightning-card title="Shadow DOM - Parent Styling Child Test" icon-name="custom:custom17">
+
+        <c-shadow-dom-demo></c-shadow-dom-demo>
+
+    </lightning-card>
+    <!--    
+    Light DOM means:
+    - No walls
+    Parent and child DOM mix together
+    CSS and JS can see everything
+    -->
+    <lightning-card title="Light DOM Demo" icon-name="custom:custom18">
+
+        <c-light-dom-child></c-light-dom-child>
+        <p>Parent DOM content</p>
+
+    </lightning-card>
+    <c-view-source source="lwc/domIntroParent" slot="footer">DOM Ownership Demo</c-view-source>
+
+
+</template>

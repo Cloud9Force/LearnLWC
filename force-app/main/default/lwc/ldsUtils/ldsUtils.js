@@ -79,3 +79,5 @@ export function reduceErrors(errors) {
             .filter((message) => !!message)
     );
 }
+
+export { getDynamicComponentConfig } from './dynamicComponentFactory';

@@ -1,0 +1,49 @@
+/* =====================================================
+   BASE STYLES
+   ===================================================== */
+
+   .box {
+    padding: 10px;
+    margin-top: 0.75rem;
+    border: 2px solid #ea0c0c;
+    border-radius: 6px;
+}
+
+/* =====================================================
+   SIMPLE & MULTI-STATE CLASSES
+   ===================================================== */
+
+.static-box {
+    background-color: #eee710;
+}
+
+.active {
+    border-color: #0176d3;
+    background-color: #17d737;
+}
+
+.error {
+    border-color: #c23934;
+    background-color: #2d12e0;
+}
+
+/* =====================================================
+   STATUS CLASSES (PRODUCTION-LIKE)
+   ===================================================== */
+
+.status.loading {
+    background-color: #f3f3f3;
+    border-style: dashed;
+}
+
+.status.success {
+    background-color: #e3fcef;
+    border-color: #2e844a;
+    border-style: dotted;
+}
+
+.status.error {
+    background-color: #fde7e9;
+    border-color: #c23934;
+    border-style:groove;
+}

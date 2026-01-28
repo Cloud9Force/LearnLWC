@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="Dynamic Components – Basics">
+
+        <div class="slds-m-bottom_small">
+            <lightning-button
+                label="Create Dynamic Component"
+                onclick={handleCreateDynamicComponent}>
+            </lightning-button>
+        </div>
+
+        <!--
+            ========================================================
+            DYNAMIC INSERTION POINT
+            ========================================================
+            This empty container is where dynamic components
+            will be inserted at runtime.
+        -->
+        <div class="dynamic-container"></div>
+
+        <p class="slds-text-body_small slds-m-top_small slds-text-color_weak">
+            Click the button to create a component dynamically.
+        </p>
+        <c-view-source source="lwc/dynamicHostBasics" slot="footer">Dynamic Components – Basics</c-view-source>
+
+    </lightning-card>
+</template>

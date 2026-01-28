@@ -1,0 +1,75 @@
+<template>
+    <lightning-card title="Attribute Contracts Demo">
+
+        <!-- ============================
+             BEHAVIOR ATTRIBUTES
+             ============================ -->
+        <section class="slds-var-p-around_medium slds-border_bottom">
+            <h3>Behavior Attributes</h3>
+            <h2>Required Field,disabled,multiple,value,readonly</h2>
+            <lightning-input
+                label="Required Field"
+                required
+                value={textValue}
+                onchange={handleChange}>
+            </lightning-input>
+
+            <lightning-button
+                label="Disabled Button"
+                disabled={isDisabled}>
+            </lightning-button>
+
+            <lightning-button
+                label="Toggle Disabled"
+                onclick={toggleDisabled}>
+            </lightning-button>
+        </section>
+
+        <!-- ============================
+             STYLE ATTRIBUTES
+             ============================ -->
+        <section class="slds-var-p-around_medium slds-border_bottom">
+            <h3>Style Attributes-variant,label,size,iconName,iconPosition</h3>
+
+            <lightning-button
+                label="Brand Button"
+                variant="brand">
+            </lightning-button>
+
+            <lightning-button
+                label="Destructive Button"
+                variant="destructive">
+            </lightning-button>
+        </section>
+
+        <!-- ============================
+             ACCESSIBILITY ATTRIBUTES
+             ============================ -->
+        <section class="slds-var-p-around_medium slds-border_bottom">
+            <h3>Accessibility Attributes -aria-label,aria-describedby,placeholder,aria-required</h3>
+
+            <lightning-input
+                aria-label="Search accounts"
+                placeholder="Search"
+                onchange={handleChange}>
+            </lightning-input>
+
+            <p id="helpText">
+                Enter search keywords
+            </p>
+
+            <lightning-input
+                aria-describedby="helpText"
+                placeholder="Accessible Input">
+            </lightning-input>
+        </section>
+        <h3>Architect Rule for Attributes
+            Behavior → JS logic
+            Style → Visual intent
+            Accessibility → Non-visual users.</br>
+            
+            <b>Never mix them.</b>
+        </h3>
+    </lightning-card>
+    <c-view-source source="lwc/patternAttributeContractDemo" slot="footer"> Pattern Attribute Contract Demo </c-view-source>
+</template>

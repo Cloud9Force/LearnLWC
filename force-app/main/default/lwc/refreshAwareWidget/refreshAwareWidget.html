@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Refresh-Aware Widget">
+
+        <p><strong>Refresh Count:</strong> {refreshCount}</p>
+        <p><strong>Last Refreshed At:</strong> {lastRefreshed}</p>
+
+        <template if:true={isRefreshing}>
+            <lightning-spinner alternative-text="Refreshing"></lightning-spinner>
+        </template>
+
+    </lightning-card>
+</template>

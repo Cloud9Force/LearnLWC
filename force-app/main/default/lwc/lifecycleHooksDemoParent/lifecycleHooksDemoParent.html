@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Lifecycle Hooks Demo Parent">
+    <p class="slds-text-body_small slds-m-bottom_small">
+        <strong>Last hook message:</strong> {lastHookMessage}
+    </p>
+    <lightning-button
+        label="Toggle Lifecycle Component"
+        onclick={toggle}>
+    </lightning-button>
+
+    <template if:true={isVisible}>
+        <c-lifecycle-hooks-demo
+            onhooklog={handleHookLog}>
+        </c-lifecycle-hooks-demo>
+    </template>
+    </lightning-card>
+    <c-view-source source="lwc/lifecycleHooksDemoParent" slot="footer"> Lifecycle Hooks Demo Parent </c-view-source>
+</template>

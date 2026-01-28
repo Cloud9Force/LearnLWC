@@ -1,0 +1,87 @@
+<template>
+    <lightning-card title="Base Component Events – Teaching Demo">
+
+        <!-- =========================================
+             UI INTERACTION EVENT
+             ========================================= -->
+        <section class="section">
+            <h3>UI Event: lightning-button (onclick)</h3>
+
+            <lightning-button
+                label="Click Me"
+                onclick={handleButtonClick}>
+            </lightning-button>
+
+            <p>Button clicked: {buttonClicked}</p>
+        </section>
+
+        <!-- =========================================
+             VALUE FROM event.target.value
+             ========================================= -->
+        <section class="section">
+            <h3>Value from event.target.value</h3>
+
+            <lightning-input
+                label="Your Name"
+                placeholder="Enter your name"
+                onchange={handleInputChange}>
+            </lightning-input>
+
+            <p>Input Name: {name}</p>
+        </section>
+
+        <!-- =========================================
+             VALUE FROM event.detail.value (ARRAY)
+             ========================================= -->
+        <section class="section">
+            <h3>Value from event.detail.value (Checkbox Group)</h3>
+
+            <lightning-checkbox-group
+                label="Skills"
+                options={skillOptions}
+                onchange={handleSkillsChange}>
+            </lightning-checkbox-group>
+
+            <p>Selected Skills: {skills}</p>
+        </section>
+
+        <!-- =========================================
+             SEMANTIC EVENT (Record Picker)
+             ========================================= -->
+        <section class="section">
+            <h3>Semantic Event (Record Picker)</h3>
+
+            <lightning-record-picker
+                label="Select Account"
+                object-api-name="Account"
+                onchange={handleRecordChange}>
+            </lightning-record-picker>
+
+            <p>Selected Record Id: {recordId}</p>
+        </section>
+
+        <!-- =========================================
+             SYSTEM EVENT (Record Edit Form)
+             ========================================= -->
+        <section class="section">
+            <h3>System Events (Record Edit Form)</h3>
+
+            <lightning-record-edit-form
+                object-api-name="Account"
+                onsuccess={handleFormSuccess}
+                onerror={handleFormError}>
+
+                <lightning-input-field field-name="Name"></lightning-input-field>
+
+                <lightning-button
+                    type="submit"
+                    label="Save Account"
+                    variant="brand">
+                </lightning-button>
+            </lightning-record-edit-form>
+
+            <p>Form Status: {formStatus}</p>
+        </section>
+    <c-view-source source="lwc/baseComponentEventsDemo" slot="footer"> Base Component Events Demo </c-view-source>
+    </lightning-card>
+</template>

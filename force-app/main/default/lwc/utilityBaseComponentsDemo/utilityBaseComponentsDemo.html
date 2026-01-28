@@ -1,0 +1,157 @@
+<template>
+    <lightning-card title="Utility & Interactive Base Components Demo">
+
+        <!-- =====================================================
+             SLIDER
+             ===================================================== -->
+        <section class="section">
+            <div class="slds-m-vertical_medium">
+                <h1 class="slds-text-heading_small">Basic Slider</h1>
+                <p class="slds-text-body_regular">A slider lets you specify a number between two specified values. If a range is not provided, the slider defaults to a minimum of 0 and a maximum of 100.</p>
+            </div>
+            
+            <lightning-slider
+                label="Volume"
+                min="0"
+                max="100"
+                value={volume}
+                size="small"
+                onchange={handleVolumeChange}>
+            </lightning-slider>
+            <p>Volume: {volume}</p>
+            <div class="slds-m-vertical_medium">
+                <h1 class="slds-text-heading_small">Slider Positioning</h1>
+                <p class="slds-text-body_regular">The slider can be positioned horizontally or vertically.</p>
+            </div>
+            
+            <lightning-slider label="Volume"></lightning-slider>
+            <lightning-slider label="Volume" type="vertical"></lightning-slider>
+        </section>
+
+        <!-- =====================================================
+             RECORD PICKER
+             ===================================================== -->
+        <section class="section">
+            <h3>Record Picker</h3>
+            <lightning-record-picker
+                label="Select Account"
+                object-api-name="Account"
+                placeholder="Search Technology Customers"
+                display-info={displayInfo}
+                filter={filter}
+                onchange={handleRecordSelect}>
+            </lightning-record-picker>
+            <p>Selected Record Id: {recordId}</p>
+        </section>
+
+        <!-- =====================================================
+             PILL
+             ===================================================== -->
+        <section class="section">
+            <h3>Pills</h3>
+            <lightning-pill-container
+                items={pillItems}
+                onitemremove={handlePillRemove}>
+            </lightning-pill-container>
+            <div class="slds-m-vertical_medium">
+                <p>Info: <span class="slds-text-heading_small">{infoText}</span></p>
+            </div>
+            <lightning-pill label="Pill With link" href="https://www.example.com"></lightning-pill>
+            <lightning-pill label="With remove handler" onremove={handleRemove}></lightning-pill>
+            <lightning-pill label="Pill With Avatar">
+                <lightning-avatar src="https://v1.lightningdesignsystem.com/assets/images/avatar2.jpg" fallback-icon-name="standard:user" variant="circle"  alternative-text="User avatar"></lightning-avatar>
+            </lightning-pill>
+            <lightning-pill label="Pill With Icon">
+                <lightning-icon icon-name="standard:account" alternative-text="Account"></lightning-icon>
+            </lightning-pill>
+        </section>
+
+        <!-- =====================================================
+             MAP
+             ===================================================== -->
+        <section class="section">
+            <h3>Map</h3>
+            <lightning-map
+                map-markers={mapMarkers}
+                zoom-level="5">
+            </lightning-map>
+        </section>
+
+        <!-- =====================================================
+             BREADCRUMBS
+             ===================================================== -->
+        <section class="section">
+            <h3>Breadcrumbs</h3>
+            <lightning-breadcrumbs>
+                <lightning-breadcrumb label="Home"></lightning-breadcrumb>
+                <lightning-breadcrumb label="Accounts"></lightning-breadcrumb>
+                <lightning-breadcrumb label="Details"></lightning-breadcrumb>
+                <lightning-breadcrumb
+                    label="Parent Account"
+                    href="http://www.google.com">
+                </lightning-breadcrumb>
+                <lightning-breadcrumb
+                    label="Case"
+                    href="http://www.google.com">
+                </lightning-breadcrumb>
+            </lightning-breadcrumbs>
+
+            <lightning-breadcrumbs>
+                <template for:each={myBreadcrumbs} for:item="crumbs">
+                    <lightning-breadcrumb
+                        key={crumbs.id}
+                        label={crumbs.label}
+                        name={crumbs.name}
+                        onclick={handleNavigateTo}>
+                    </lightning-breadcrumb>
+                </template>
+            </lightning-breadcrumbs>
+            <p>Breadcrumbs message: {breadcrumbsMessage}</p>
+            <pre class="slds-m-top_x-small">{breadcrumbsJson}</pre>
+            
+            <p>Name: {name}</p>
+        </section>
+
+        <!-- =====================================================
+             NAVIGATION ITEM
+             ===================================================== -->
+        <section class="section">
+            <h3>Navigation Item</h3>
+            <lightning-button
+                label="Go to Salesforce"
+                onclick={navigateToSalesforce}>
+            </lightning-button>
+        </section>
+
+        <!-- =====================================================
+             PROGRESS BAR
+             ===================================================== -->
+        <section class="section">
+            <h3>Progress Bar</h3>
+            <lightning-progress-bar value={progress}></lightning-progress-bar>
+            <lightning-button
+                label="Increase Progress"
+                onclick={increaseProgress}>
+            </lightning-button>
+            
+        </section>
+
+        <!-- =====================================================
+             TOAST & PROMPT
+             ===================================================== -->
+        <section class="section">
+            <h3>Toast & Prompt</h3>
+            <lightning-button
+                label="Show Toast"
+                onclick={showToast}>
+            </lightning-button>
+            <lightning-button label="Show Sticky Toast" onclick={showStickyToast}>
+            </lightning-button>
+            <lightning-button
+                label="Show Prompt"
+                onclick={showPrompt}>
+            </lightning-button>
+        </section>
+
+    </lightning-card>
+</template>

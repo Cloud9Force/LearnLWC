@@ -1,0 +1,179 @@
+<template>
+    <lightning-card title="Container Base Components Demo" icon-name="standard:layout">
+
+        <!-- ===================================================
+             Simple card section
+             =================================================== -->
+        <div class="section">
+            <p>This is a simple message inside a <code>lightning-card</code> container.</p>
+        </div>
+
+        <!-- ===================================================
+             Accordion
+             =================================================== -->
+        <div class="section">
+            <p><strong>Accordion Sections</strong></p>
+            <lightning-button onclick={handleSetActiveSectionC} label="Open Section C"></lightning-button>
+            <lightning-button onclick={handleToggleSectionD} label="Toggle Section D"></lightning-button>
+
+            <lightning-accordion allow-multiple-sections-open onsectiontoggle={handleAccordionToggle} active-section-name="B" class="example-accordion" >
+                <lightning-accordion-section label="Section One" name="A">
+                    <lightning-button-menu slot="actions"
+                                  alternative-text="Show menu"
+                                  icon-size="x-small"
+                                  menu-alignment="right">
+                        <lightning-menu-item value="New" label="Menu Item One"></lightning-menu-item>
+                        <lightning-menu-item value="Edit" label="Menu Item Two"></lightning-menu-item>
+                    </lightning-button-menu>
+                </lightning-accordion-section>
+                <lightning-accordion-section label="Section Two" name="B">
+                    <p>Content for section B</p>
+                </lightning-accordion-section>
+                <lightning-accordion-section label="Section Three" name="C">
+                    <p>Content for section C</p>
+                </lightning-accordion-section>
+                <template if:true={isDVisible}>
+                    <lightning-accordion-section label="Section Four" name="D">
+                        <p>This is the content area for section D.</p>
+                        <p>Suspendisse est eros, maximus et risus a, luctus bibendum eros. Etiam ultrices tellus vehicula neque ornare, viverra venenatis purus accumsan. Aenean viverra finibus odio, vitae bibendum nisi tincidunt sed. Ut at porta dui. Praesent varius eleifend quam eget gravida. Curabitur maximus, leo sit amet dapibus gravida, mi ligula lacinia turpis, id feugiat tellus urna quis odio. Nullam tristique orci eu magna hendrerit vestibulum. Sed id purus at metus tristique tristique et vitae arcu. Sed molestie odio felis, sit amet lacinia mauris rutrum nec. Morbi semper lacinia tellus bibendum faucibus. Vestibulum eget ornare sapien, eget ultrices orci.</p>
+                    </lightning-accordion-section>
+                </template>
+            </lightning-accordion>
+        </div>
+        <p class="slds-text-body_small slds-m-top_x-small">
+            {lastAccordionSection}
+        </p>
+        <p class="slds-text-body_small slds-m-top_x-small">
+            {activeSectionsMessage}
+        </p>
+        <!-- ===================================================
+             Tabset
+             =================================================== -->
+        <div class="section">
+            <p><strong>Tabs</strong></p>
+            <lightning-tabset
+                variant={tabsetVariant}
+                active-tab-value={activeTab}
+                onchange={handleTabChange}>
+                <lightning-tab label="Home" value="home" onactive={handleActive}>
+                    <p>This is the Home tab.</p>
+                </lightning-tab>
+                <lightning-tab label="Profile" value="profile" onactive={handleActive}>
+                    <p>This is the Profile tab.</p>
+                </lightning-tab>
+                <lightning-tab label="Settings" value="settings" onactive={handleActive}>
+                    <p>This is the Settings tab.</p>
+                </lightning-tab>
+                <template if:true={showTabFour}>
+                    <lightning-tab label="Item Four" value="four" onactive={handleActive}>
+                        <p>This is the Item Four tab.</p>
+                    </lightning-tab>
+                </template>
+            </lightning-tabset>
+            <lightning-formatted-text value={activeValueMessage}></lightning-formatted-text>
+            <br />
+            <br />
+            <lightning-button label="Toggle Optional Tab" onclick={toggleOptionalTab}></lightning-button>
+            <lightning-button
+                class="slds-m-left_x-small"
+                label="Toggle Tab Orientation"
+                onclick={handleToggleTabOrientation}>
+            </lightning-button>
+        </div>
+
+        <!-- ===================================================
+             Layout
+             =================================================== -->
+        <div class="section">
+            <p><strong>Responsive Layout</strong></p>
+            <lightning-layout horizontal-align={horizontalAlign}>
+                <lightning-layout-item flexibility="auto" padding="around-small">
+                    <div class="layout-box">Item 1</div>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto" padding="around-small">
+                    <div class="layout-box">Item 2</div>
+                </lightning-layout-item>
+                <!-- horizontal-align="spread" will distribute the space between the items -->
+                <lightning-layout-item flexibility="auto" padding="around-small">
+                    <div class="layout-box">Item 3</div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+
+        <!-- ===================================================
+             Button Menu
+             =================================================== -->
+        <div class="section">
+            <p><strong>Button Menu</strong></p>
+            <div class="slds-p-around_medium lgc-bg">
+                <lightning-button-menu  alternative-text="Actions" onselect={handleButtonMenuSelect} variant="border-filled" icon-name="utility:settings">
+                    <lightning-menu-item label="Action One" value="one" onclick={handleMenuSelect}></lightning-menu-item>
+                    <lightning-menu-item label="Action Two" value="two" onclick={handleMenuSelect}></lightning-menu-item>
+                    <lightning-menu-divider></lightning-menu-divider>
+                    <lightning-menu-item label="Action Three" value="three" onclick={handleMenuSelect}></lightning-menu-item>
+                </lightning-button-menu>
+
+                <p class="slds-text-body_small slds-m-top_x-small">
+                    {lastMenuAction}
+                </p>
+                <p class="slds-text-body_small slds-m-top_x-small">
+                    {selectedItemValue}
+                </p>
+                <p class="slds-text-body_small slds-m-top_x-small">
+                    {lastMenuAction}
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ===================================================
+             Grouped Buttons
+             =================================================== -->
+        <div class="section">
+            <p><strong>Button Group</strong></p>
+            <!-- Button group: simple buttons and a button-menu -->
+        <lightning-button-group>
+            <lightning-button label="Refresh" onclick={handleButtonGroupClick}></lightning-button>
+            <lightning-button label="Edit" onclick={handleButtonGroupClick}></lightning-button>
+            <lightning-button label="Save" icon-name="utility:save" onclick={handleButtonGroupClick}></lightning-button>
+            <lightning-button-menu
+                alternative-text="Show menu"
+                variant="border-filled"
+                onselect={handleButtonGroupMenuSelect}>
+                <lightning-menu-item label="Menu Item One" value="item1"></lightning-menu-item>
+                <lightning-menu-item label="Menu Item Two" value="item2"></lightning-menu-item>
+                <lightning-menu-item label="Menu Item Three" value="item3"></lightning-menu-item>
+            </lightning-button-menu>
+        </lightning-button-group>
+        <!-- Button group: simple buttons -->
+        <lightning-button-group>
+            <lightning-button label="Refresh" onclick={handleButtonGroupClick}></lightning-button>
+            <lightning-button label="Edit" onclick={handleButtonGroupClick}></lightning-button>
+            <lightning-button label="Save" icon-name="utility:save" onclick={handleButtonGroupClick}></lightning-button>
+            <lightning-button label="Delete" variant="destructive" icon-name="utility:delete" onclick={handleButtonGroupClick}></lightning-button>
+        </lightning-button-group>
+        <p class="slds-text-body_small slds-m-top_x-small">
+            {buttonGroupMessage}
+        </p>
+        </div>
+
+        <!-- ===================================================
+             Event Output
+             =================================================== -->
+        <div class="section state">
+            <h4>Event Log</h4>
+            <p>Accordion open section: {lastAccordionSection}</p>
+            <p>Accordion message: {activeSectionsMessage}</p>
+            <p>Section D visible: {isDVisible}</p>
+            <p>Active Tab: {activeTab}</p>
+            <p>Active tab message: {activeValueMessage}</p>
+            <p>Vertical tabs: {isVerticalTabs}</p>
+            <p>Optional tab shown: {showTabFour}</p>
+            <p>Last menu choice: {lastMenuAction}</p>
+            <p>Button menu item: {selectedItemValue}</p>
+            <p>Button group message: {buttonGroupMessage}</p>
+            <p>Layout align: {horizontalAlign}</p>
+        </div>
+    <c-view-source source="lwc/containerBaseDemo" slot="footer"> Container Base Components Demo </c-view-source>
+    </lightning-card>
+</template>

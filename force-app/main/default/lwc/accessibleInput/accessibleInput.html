@@ -1,0 +1,15 @@
+<template>
+    <!-- Help text visually appears below an input —but screen readers don’t know it belongs to the input.
+     When focused, screen readers will say:“Email, edit text. Enter a valid email address.”
+ -->
+    <label for="emailInput">Email</label>
+
+    <input
+        id="emailInput"
+        type="email"
+        aria-describedby="emailHelp" />
+
+    <p id="emailHelp">
+        Enter a valid email address.
+    </p>
+</template>

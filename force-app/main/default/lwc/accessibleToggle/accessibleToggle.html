@@ -1,0 +1,10 @@
+<template>
+    <button
+        class="toggle"
+        aria-label={label}
+        aria-pressed={pressed}
+        onclick={handleToggle}>
+        {label}: {pressedText}
+    </button>
+    <c-view-source source="lwc/accessibleToggle" slot="footer"> Accessible Toggle </c-view-source>
+</template>

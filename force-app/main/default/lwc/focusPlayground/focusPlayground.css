@@ -1,0 +1,6 @@
+.modal-container {
+    background: rgb(255 255 255);
+    border: 1px solid #ccc;
+    padding: 1rem;
+    box-shadow: 0 0px 12px rgba(0, 0, 0, 0.2);
+}

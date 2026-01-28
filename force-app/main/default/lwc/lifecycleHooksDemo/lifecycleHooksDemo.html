@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="LWC Lifecycle Hooks Demo">
+
+        <p class="hook-box slds-box slds-m-bottom_small">
+            Lifecycle status display
+        </p>
+
+        <template if:true={hookLogs}>
+            <p><strong>Recent hook logs:</strong></p>
+            <ul>
+                <template for:each={hookLogs} for:item="log">
+                    <li key={log}>{log}</li>
+                </template>
+            </ul>
+        </template>
+
+        <div class="slds-m-top_small">
+            <lightning-button
+                class="programmatic-listener"
+                label="Programmatic Listener Demo">
+            </lightning-button>
+        </div>
+
+    </lightning-card>
+    <c-view-source source="lwc/lifecycleHooksDemo" slot="footer"> Lifecycle Hooks Demo </c-view-source>
+</template>

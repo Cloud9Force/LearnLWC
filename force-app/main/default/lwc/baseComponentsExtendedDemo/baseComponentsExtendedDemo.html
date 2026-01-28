@@ -1,0 +1,180 @@
+<template>
+    <lightning-card title="Base Components – Extended Demo" icon-name="standard:apps">
+
+        <!-- =====================================================
+             BUTTONS
+             ===================================================== -->
+        <section class="section">
+            <h3>Buttons</h3>
+
+            <lightning-button
+                label="Brand Button"
+                variant="brand"
+                onclick={handleButtonClick}>
+            </lightning-button>
+
+            <lightning-button-icon
+                icon-name="utility:settings"
+                alternative-text="Settings"
+                onclick={handleIconClick}>
+            </lightning-button-icon>
+        </section>
+
+        <!-- =====================================================
+             TEXT INPUT
+             ===================================================== -->
+        <section class="section">
+            <h3>Text Input</h3>
+
+            <lightning-input
+                label="Full Name"
+                value={name}
+                onchange={handleNameChange}
+                onblur={handleNameBlur}
+                onfocus={handleNameFocus}
+                required>
+            </lightning-input>
+            <p class="slds-text-body_small slds-m-top_x-small">
+                {nameFocusStatus}
+            </p>
+        </section>
+
+        <!-- =====================================================
+             TEXTAREA
+             ===================================================== -->
+        <section class="section">
+            <h3>Textarea</h3>
+
+            <lightning-textarea
+                label="Description"
+                value={description}
+                onchange={handleDescriptionChange}>
+            </lightning-textarea>
+            <p class="slds-text-body_small slds-m-top_x-small">
+                {description}
+            </p>
+        </section>
+
+        <!-- =====================================================
+             SELECT & COMBOBOX
+             ===================================================== -->
+        <section class="section">
+            <h3>Select & Combobox</h3>
+
+            <lightning-select
+                label="Country (select)"
+                name="countrySelect"
+                value={country}
+                options={countryOptions}
+                onchange={handleCountryChange}>
+            </lightning-select>
+            <p class="slds-text-body_small slds-m-top_x-small">
+                {country}
+            </p>
+            <lightning-button label="Register" onclick={register}></lightning-button>
+            <lightning-combobox
+                label="Country (combobox)"
+                value={country}
+                options={countryOptions}
+                onchange={handleCountryChange}>
+            </lightning-combobox>
+            <p class="slds-text-body_small slds-m-top_x-small">
+                {country}
+            </p>
+        </section>
+
+        <!-- =====================================================
+             CHECKBOX GROUP
+             ===================================================== -->
+        <section class="section">
+            <h3>Checkbox Group</h3>
+
+            <lightning-checkbox-group
+                label="Skills"
+                options={skillOptions}
+                value={skills}
+                onchange={handleSkillsChange}>
+            </lightning-checkbox-group>
+            <p class="slds-text-body_small slds-m-top_x-small">
+                {skills}
+            </p>
+        </section>
+
+        <!-- =====================================================
+             RADIO GROUP
+             ===================================================== -->
+        <section class="section">
+            <h3>Radio Group</h3>
+
+            <lightning-radio-group
+                label="Employment Type"
+                options={employmentOptions}
+                value={employmentType}
+                onchange={handleEmploymentChange}>
+            </lightning-radio-group>
+            <p class="slds-text-body_small slds-m-top_x-small">
+                {employmentType}
+            </p>
+        </section>
+
+        <!-- =====================================================
+             DUAL LISTBOX
+             ===================================================== -->
+        <section class="section">
+            <h3>Dual Listbox</h3>
+
+            <lightning-dual-listbox
+                label="Assign Roles"
+                source-label="Available"
+                selected-label="Assigned"
+                options={roleOptions}
+                value={roles}
+                onchange={handleRolesChange}>
+            </lightning-dual-listbox>
+            <p class="slds-text-body_small slds-m-top_x-small">
+                {roles}
+            </p>
+        </section>
+
+        <!-- =====================================================
+             SPINNER & STATUS
+             ===================================================== -->
+        <section class="section">
+            <h3>Status</h3>
+
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading"></lightning-spinner>
+            </template>
+            <lightning-dynamic-icon
+                type="eq"
+                option="play"
+                alternative-text="Recording in progress">
+            </lightning-dynamic-icon>
+
+            <lightning-badge label="Demo Running"></lightning-badge>
+            <lightning-icon icon-name="utility:success"></lightning-icon>
+            <lightning-dynamic-icon 
+        type="ellie" 
+        alternative-text="Ellie intelligence">
+    </lightning-dynamic-icon>
+            <lightning-badge label="Inverse" class="slds-badge_inverse"></lightning-badge>
+        <lightning-badge label="Lightest" class="slds-badge_lightest"></lightning-badge>
+        <lightning-badge label="Alpha" icon-name="standard:event"></lightning-badge>
+        <lightning-badge label="Beta" icon-name="standard:email" icon-position="end"></lightning-badge>
+        </section>
+
+        <!-- =====================================================
+             STATE DISPLAY
+             ===================================================== -->
+        <section class="section state">
+            <h3>Current Component State</h3>
+            <p>Name: {name}</p>
+            <p>Description: {description}</p>
+            <p>Country: {country}</p>
+            <p>Skills: {skills}</p>
+            <p>Employment: {employmentType}</p>
+            <p>Roles: {roles}</p>
+        </section>
+        <c-view-source source="lwc/baseComponentsExtendedDemo" slot="footer"> Base components extended demo  </c-view-source>
+    </lightning-card>
+</template>

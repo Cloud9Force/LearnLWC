@@ -1,0 +1,8 @@
+.inner {
+    background: red; /* ❌ WILL NOT APPLY */
+}
+.light-box {
+    background: green;
+    color: white;
+    padding: 10px;
+}

@@ -1,0 +1,39 @@
+<template>
+    <lightning-card title="Master–Detail Pattern">
+
+        <lightning-layout>
+
+            <!-- ===========================
+                 MASTER (NAVIGATION)
+                 =========================== -->
+            <lightning-layout-item size="4">
+                <lightning-tree
+                    items={treeItems}
+                    onselect={handleSelect}>
+                </lightning-tree>
+            </lightning-layout-item>
+
+            <!-- ===========================
+                 DETAIL (CONTEXTUAL VIEW)
+                 =========================== -->
+            <lightning-layout-item size="8">
+                <template if:true={selectedItem}>
+                    <lightning-record-view-form
+                        record-id={selectedItem.id}
+                        object-api-name="Account">
+
+                        <lightning-output-field field-name="Name"></lightning-output-field>
+                        <lightning-output-field field-name="Industry"></lightning-output-field>
+
+                    </lightning-record-view-form>
+                </template>
+
+                <template if:false={selectedItem}>
+                    <p>Select an item to see details</p>
+                </template>
+            </lightning-layout-item>
+
+        </lightning-layout>
+
+    </lightning-card>
+</template>

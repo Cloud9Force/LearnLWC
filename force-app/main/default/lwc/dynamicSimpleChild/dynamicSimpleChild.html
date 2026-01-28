@@ -1,0 +1,26 @@
+<template>
+    <div class="slds-box slds-theme_success">
+        <p class="slds-text-title_caps">
+            Dynamic Child Component
+        </p>
+
+        <p class="slds-text-body_small">
+            {titlemessage}
+        </p>
+    </div>
+
+    <div class="slds-box slds-theme_success">
+        <p class="slds-text-title_caps">
+            Dynamic Child (Interaction)
+        </p>
+
+        <p class="slds-text-body_small">
+            <strong>Message from parent:</strong> {message}
+        </p>
+
+        <lightning-button
+            label="Notify Parent"
+            onclick={handleNotifyParent}>
+        </lightning-button>
+    </div>
+</template>

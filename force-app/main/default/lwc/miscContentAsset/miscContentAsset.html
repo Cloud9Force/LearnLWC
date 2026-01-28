@@ -1,0 +1,40 @@
+<template>
+    <lightning-card title="ContentAsset-Files-Images" icon-name="custom:custom49">
+        <div class="slds-var-m-around_medium">
+            <img src={recipesLogoUrl} alt="Recipes logo" />
+        </div>
+        
+    </lightning-card>
+    <lightning-card title="Accessing Labels in LWC" icon-name="custom:custom49">
+        
+        <p>{label.helloLabel}</p>
+    </lightning-card>
+    <lightning-card title="User Object Properties - GetUserId" icon-name="custom:custom19">
+        <div class="slds-m-around_medium">
+          <p>User Id:</p>
+          {userId}
+        </div>
+      </lightning-card>
+      <lightning-card title="Access Permissions in LWC" icon-name="custom:custom19">
+        <div class="slds-var-m-around_medium">
+            <template lwc:if={isRestrictedUIAccessible}>
+                <p>The permission set is assigned - {isRestrictedUIAccessible}</p>
+            </template>
+            <template lwc:else>
+                <p>The permission set is not assigned - {isRestrictedUIAccessible}</p>
+            </template>
+        </div>
+        <div class="slds-var-m-around_medium">
+            <template lwc:if={isModifyAllDataEnabled}>
+                <p>The permission set is assigned - {isModifyAllDataEnabled}</p>
+            </template>
+            <template lwc:else>
+                <p>The permission set is not assigned - {isModifyAllDataEnabled}</p>
+            </template>
+        </div>
+        <div class="slds-var-m-around_medium"><lightning-button label="Check Restricted UI Access" disabled={isSetupEnabled} onclick={checkRestrictedUIAccess}></lightning-button></div>
+      </lightning-card>
+    <c-view-source source="lwc/miscContentAsset" slot="footer">
+        Use content assets.
+    </c-view-source>
+</template>

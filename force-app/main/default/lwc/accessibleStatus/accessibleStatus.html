@@ -1,0 +1,13 @@
+<template>
+    <div
+        role="status"
+        aria-live="polite"
+        class="status">
+        {message}
+    </div>
+
+    <lightning-button
+        label="Update Status"
+        onclick={updateStatus}>
+    </lightning-button>
+</template>

@@ -1,0 +1,97 @@
+<template>
+    <lightning-card title="Hierarchy Components Demo - Tree" icon-name="standard:tree">
+
+        <!-- ==========================================
+             TREE
+             ========================================== -->
+        <section class="section">
+            <h3>Lightning Tree</h3>
+            <lightning-tree
+                items={treeItems}
+                selected-item={selectedItemValue}
+                header="Company Structure"
+                onselect={handleOnselect}>
+            </lightning-tree>
+            <div class="slds-m-vertical_medium">
+                <p>The selected item is: <span class="slds-text-heading_small">{selectedItemValue}</span></p>
+            </div>
+            <lightning-button
+                label="Add to Tree"
+                id="change-button"
+                onclick={handleClick}
+            >
+            </lightning-button>
+            <lightning-button
+                label="Change Selected"
+                onclick={handleChangeSelected}
+            ></lightning-button>
+            
+        </section>
+    </lightning-card>
+    <lightning-card title="Tree Grid" icon-name="standard:tree">
+        <!-- ==========================================
+             TREE GRID
+             ========================================== -->
+        <section class="section">
+            <h3>Tree Grid</h3>
+            <lightning-tree-grid
+                columns={gridColumnsLocal}
+                data={gridDataLocal}
+                key-field={gridKeyFieldLocal}>
+            </lightning-tree-grid>
+        </section>
+
+    </lightning-card>
+
+    <lightning-card title="Tree Grid" icon-name="standard:tree">
+        <div class="slds-m-top_medium slds-m-bottom_x-large">
+            <p class="slds-m-bottom_medium">
+              Tree Grid component demonstrating the <code>row-toggle-icon</code> attribute.
+            </p>
+        
+            <!-- Single icon for both states, with the icon rotating 90 degrees when item expands -->
+            <h3 class="slds-text-heading_small slds-m-bottom_x-small">Single icon</h3>
+            <div class="slds-p-around_medium lgc-bg slds-m-bottom_large">
+              <lightning-tree-grid
+                columns={gridColumns}
+                data={gridData}
+                key-field={gridKeyField}
+                row-toggle-icon={rowToggleIconSingle}
+              ></lightning-tree-grid>
+            </div>
+        
+            <!-- Different icons for expanded and collapsed states -->
+            <h3 class="slds-text-heading_small slds-m-bottom_x-small">
+              Different icons for expanded and collapsed states
+            </h3>
+            <div class="slds-p-around_medium lgc-bg">
+              <lightning-tree-grid
+                columns={gridColumns}
+                data={gridData}
+                key-field={gridKeyField}
+                row-toggle-icon={rowToggleIconStates}
+              ></lightning-tree-grid>
+            </div>
+          </div>
+    </lightning-card>
+    <lightning-card title="Tree Grid" icon-name="standard:tree">
+        <div class="slds-m-top_medium slds-m-bottom_x-large">
+            <p class="slds-m-bottom_medium">
+              Tree Grid component that appends icons to column data via
+              <code>cellAttributes</code>
+              .
+            </p>
+        
+            <!-- Single icon appended on the left -->
+            <h3 class="slds-text-heading_small slds-m-bottom_x-small">Single icon</h3>
+            <div class="slds-p-around_medium lgc-bg slds-m-bottom_large">
+              <lightning-tree-grid
+                columns={gridColumnsSingle}
+                data={gridData1}
+                key-field="name"
+              ></lightning-tree-grid>
+            </div>
+        </div>
+    </lightning-card>
+    <c-view-source source="lwc/baseComponentHierarchyDemo" slot="footer"> Base Component Hierarchy Demo </c-view-source>
+</template>

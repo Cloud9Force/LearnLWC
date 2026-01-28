@@ -1,10 +1,13 @@
 <template>
-    <div class="slds-box slds-theme_shade">
-        <p class="slds-text-title_caps slds-m-bottom_small">Parent: Receives Child Event</p>
-        <c-bubbling-demo-child onbubbledemo={handleChildEvent}></c-bubbling-demo-child>
-        <div class="slds-m-top_small slds-border_top slds-p-top_small">
-            <p class="slds-text-title_caps">Parent Received</p>
-            <pre class="slds-text-body_small slds-scrollable_y">{lastParentEvent}</pre>
+    <lightning-card title="Bubbling Demo Parent" icon-name="custom:custom19">
+        <div class="slds-box slds-theme_shade">
+            <p class="slds-text-title_caps slds-m-bottom_small">Parent: Receives Child Event</p>
+            <c-bubbling-demo-child onbubbledemo={handleChildEvent}></c-bubbling-demo-child>
+            <div class="slds-m-top_small slds-border_top slds-p-top_small">
+                <p class="slds-text-title_caps">Parent Received</p>
+                <pre class="slds-text-body_small slds-scrollable_y">{lastParentEvent}</pre>
+            </div>
         </div>
-    </div>
+    <c-view-source source="lwc/bubblingDemoParent" slot="footer"> Bubbling Demo Parent </c-view-source>
+    </lightning-card>
 </template>

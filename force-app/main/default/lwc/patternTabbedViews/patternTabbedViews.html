@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="Tabbed Views Pattern">
+
+        <lightning-tabset>
+
+            <lightning-tab label="Details">
+                <lightning-record-view-form
+                    record-id={recordId}
+                    object-api-name="Account">
+
+                    <lightning-output-field field-name="Name"></lightning-output-field>
+                    <lightning-output-field field-name="Industry"></lightning-output-field>
+
+                </lightning-record-view-form>
+            </lightning-tab>
+
+            <lightning-tab label="Related">
+                <p>Related lists go here</p>
+            </lightning-tab>
+
+            <lightning-tab label="Settings">
+                <lightning-input
+                    label="Custom Setting">
+                </lightning-input>
+            </lightning-tab>
+
+        </lightning-tabset>
+
+    </lightning-card>
+</template>

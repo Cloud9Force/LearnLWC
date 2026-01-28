@@ -1,0 +1,86 @@
+<template>
+    <lightning-card title="Class Binding Playground">
+
+        <!-- =====================================================
+             EXAMPLE 1: STATIC CLASS (NO JS)
+             ===================================================== -->
+        <section>
+            <h3>1. Static Class</h3>
+            <div class="box static-box">
+                Static class (pure HTML)
+            </div>
+        </section>
+
+        <!-- =====================================================
+             EXAMPLE 2: SIMPLE DYNAMIC CLASS (BOOLEAN)
+             ===================================================== -->
+        <section>
+            <h3>2. Single Dynamic Class</h3>
+
+            <div class={simpleClass}>
+                Active toggles this class
+            </div>
+
+            <lightning-button
+                label="Toggle Active"
+                onclick={toggleActive}>
+            </lightning-button>
+        </section>
+
+        <!-- =====================================================
+             EXAMPLE 3: MULTIPLE CONDITIONAL CLASSES
+             ===================================================== -->
+        <section>
+            <h3>3. Multiple Conditional Classes</h3>
+
+            <div class={multiClass}>
+                Active + Error combination
+            </div>
+
+            <lightning-button
+                label="Toggle Error"
+                onclick={toggleError}>
+            </lightning-button>
+        </section>
+
+        <!-- =====================================================
+             EXAMPLE 4: API v62.0 NORMALIZED ARRAY
+             ===================================================== -->
+        <section>
+            <h3>4. API v62.0 Normalized Class Array</h3>
+
+            <div class={normalizedClass}>
+                Array-based class binding
+            </div>
+        </section>
+
+        <!-- =====================================================
+             EXAMPLE 5: STATE-DRIVEN STATUS CLASS
+             ===================================================== -->
+        <section>
+            <h3>5. Status-driven Class (Production Pattern)</h3>
+
+            <div class={statusClass}>
+                Status: {status}
+            </div>
+
+            <lightning-button
+                label="Next Status"
+                onclick={nextStatus}>
+            </lightning-button>
+        </section>
+
+        <!-- =====================================================
+             EXAMPLE 6: SLDS UTILITY CLASSES
+             ===================================================== -->
+        <section>
+            <h3>6. SLDS Utility Classes</h3>
+
+            <div class="slds-box slds-theme_success slds-m-top_medium">
+                This box uses only SLDS utility classes
+            </div>
+        </section>
+
+    </lightning-card>
+    <c-view-source source="lwc/classBindingPlayground" slot="footer"> Class Binding Playground </c-view-source>
+</template>

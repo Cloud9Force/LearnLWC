@@ -1,0 +1,114 @@
+<template>
+    <lightning-card title="Advanced Container Base Components Demo">
+
+        <!-- =====================================================
+             CAROUSEL
+             ===================================================== -->
+        <section class="section">
+            <p><strong>Carousel</strong></p>
+            <lightning-carousel class="carousel-demo" onitemchange={handleCarouselChange}>
+                <lightning-carousel-image
+                    src="https://v1.lightningdesignsystem.com/assets/images/carousel/carousel-01.jpg"
+                    header="Slide 1"
+                    description="First slide image">
+                </lightning-carousel-image>
+                <lightning-carousel-image
+                    src="https://v1.lightningdesignsystem.com/assets/images/carousel/carousel-02.jpg"
+                    header="Slide 2"
+                    description="Second slide image">
+                </lightning-carousel-image>
+                <lightning-carousel-image
+                    src="https://v1.lightningdesignsystem.com/assets/images/carousel/carousel-03.jpg"
+                    header="Slide 3"
+                    description="Third slide image">
+                </lightning-carousel-image>
+            </lightning-carousel>
+
+            <p>Current Carousel Index: {carouselIndex}</p>
+        </section>
+
+        <!-- =====================================================
+             MODAL (lightning-modal)
+             ===================================================== -->
+        <section class="section">
+            <p><strong>Modal Dialog</strong></p>
+            <lightning-button
+                label="Open Modal"
+                onclick={openModal}
+                class="open-modal-btn">
+            </lightning-button>
+            <template if:true={isModalOpen}>
+                <section
+                    role="dialog"
+                    tabindex="-1"
+                    class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <h2 class="slds-text-heading_medium">
+                                Demo Modal
+                            </h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium">
+                            <p>This modal is rendered from the template.</p>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning-button
+                                label="Close"
+                                onclick={closeModal}>
+                            </lightning-button>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+        </section>
+
+        <!-- =====================================================
+             QUICK ACTION PANEL (Beta)
+             ===================================================== -->
+        <section class="section">
+            <p><strong>Quick Action Panel (Beta)</strong></p>
+            <template if:true={showQuickActionPanel}>
+                <lightning-quick-action-panel header="My Quick Action Panel">
+                    <p>This is the body of a quick action panel.</p>
+                    <div slot="footer">
+                        <lightning-button label="Done" onclick={closeQuickActionPanel}></lightning-button>
+                    </div>
+                </lightning-quick-action-panel>
+            </template>
+            <lightning-button
+                label="Show Quick Action Panel"
+                onclick={showQuickAction}>
+            </lightning-button>
+        </section>
+
+        <!-- =====================================================
+             TILE
+             ===================================================== -->
+        <section class="section">
+            <p><strong>Tile</strong></p>
+            <lightning-tile label="Tile Example">
+                <p>This is content inside a tile.</p>
+            </lightning-tile>
+        </section>
+        <!-- With an icon -->
+        <div class="slds-p-around_medium lgc-bg">
+            <lightning-tile label="Lightning component team" type="media">
+                <lightning-icon slot="media" icon-name="standard:groups"></lightning-icon>
+                <p class="slds-truncate" title="7 Members">7 Members</p>
+            </lightning-tile>
+        </div>
+        <!-- With an avatar -->
+        <div class="slds-p-around_medium lgc-bg">
+            <lightning-tile label="Bruce Wayne" href="/bruce.html" type="media">
+                <lightning-avatar slot="media" src="https://v1.lightningdesignsystem.com/assets/images/avatar1.jpg" fallback-icon-name="standard:person_account" alternative-text="Bruce Wayne"></lightning-avatar>
+                <ul class="slds-list_horizontal slds-has-dividers_right">
+                    <li class="slds-item">Billionaire, Gotham City</li>
+                    <li class="slds-item">Dark Knight</li>
+                </ul>
+            </lightning-tile>
+        </div>
+
+    </lightning-card>
+    <c-view-source source="lwc/containersBaseDemoAdvanced" slot="footer"> Containers Base Demo Advanced </c-view-source>
+</template>

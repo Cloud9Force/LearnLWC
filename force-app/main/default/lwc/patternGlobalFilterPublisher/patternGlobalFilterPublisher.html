@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Global Filter Publisher">
+        <lightning-combobox
+            label="Select Department"
+            value={department}
+            options={options}
+            onchange={handleChange}>
+        </lightning-combobox>
+        <c-view-source source="lwc/patternGlobalFilterPublisher" slot="footer"> Pattern Global Filter Publisher </c-view-source>
+    </lightning-card>
+</template>

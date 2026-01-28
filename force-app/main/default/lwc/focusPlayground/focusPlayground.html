@@ -1,0 +1,74 @@
+<template>
+    <lightning-card title="Focus Management Playground">
+
+        <!-- ============================
+             BASIC FOCUS CONTROL
+             ============================ -->
+        <div class="section">
+            <p>Basic Focus Example</p>
+            <lightning-button
+                label="Focus Name Input"
+                onclick={handleFocusName}>
+            </lightning-button>
+            <input
+                type="text"
+                placeholder="Type your name"
+                class="name-input">
+        </div>
+
+        <hr />
+
+        <!-- ============================
+             DYNAMIC FOCUS (AFTER RENDER)
+             ============================ -->
+        <div class="section">
+            <p>Dynamic Focus Example</p>
+            <lightning-button
+                label="Show Comment Input"
+                onclick={showCommentInput}>
+            </lightning-button>
+
+            <!-- Will be rendered dynamically -->
+            <template if:true={showComment}>
+                <input
+                    type="text"
+                    placeholder="Enter comment"
+                    class="comment-input">
+            </template>
+        </div>
+
+        <hr />
+
+        <!-- ============================
+             MODAL FOCUS TRAP
+             ============================ -->
+        <div class="section">
+            <p>Modal Focus Trap Example</p>
+            <lightning-button
+                label="Open Modal"
+                onclick={openModal}
+                class="open-modal-btn">
+            </lightning-button>
+
+            <template if:true={isModalOpen}>
+                <section
+                    tabindex="-1"
+                    class="modal-container"
+                    role="dialog"
+                    aria-modal="true">
+                    <p>Modal Dialog (focus trapped)</p>
+                    <lightning-button
+                        label="Confirm"
+                        onclick={closeModal}>
+                    </lightning-button>
+                    <lightning-button
+                        label="Cancel"
+                        onclick={closeModal}>
+                    </lightning-button>
+                </section>
+            </template>
+        </div>
+
+    </lightning-card>
+    <c-view-source source="lwc/focusPlayground" slot="footer"> Focus Management Playground </c-view-source>
+</template>
