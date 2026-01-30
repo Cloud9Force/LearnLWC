@@ -1,0 +1,89 @@
+<template>
+    <lightning-card title="Master–Detail Pattern (Records & Forms)">
+
+        <lightning-layout multiple-rows>
+
+            <!-- ==================================================
+                 MASTER: RECORD LIST WITH ACTIONS
+                 ================================================== -->
+            <lightning-layout-item size="12" medium-device-size="4" large-device-size="4" padding="around-small">
+
+                <lightning-datatable
+                    key-field="Id"
+                    data={records}
+                    columns={columns}
+                    onrowaction={handleRowAction}>
+                </lightning-datatable>
+
+            </lightning-layout-item>
+
+            <!-- ==================================================
+                 DETAIL: CONTEXTUAL RECORD VIEW / EDIT
+                 ================================================== -->
+            <lightning-layout-item size="12" medium-device-size="8" large-device-size="8" padding="around-small">
+
+                <template if:true={selectedRecordId}>
+
+                    <!-- ===============================
+                         VIEW MODE
+                         =============================== -->
+                    <template if:true={isViewMode}>
+                        <lightning-record-view-form
+                            record-id={selectedRecordId}
+                            object-api-name="Account">
+
+                            <lightning-output-field field-name="Name"></lightning-output-field>
+                            <lightning-output-field field-name="Industry"></lightning-output-field>
+                            <lightning-output-field field-name="Phone"></lightning-output-field>
+
+                        </lightning-record-view-form>
+                    </template>
+
+                    <!-- ===============================
+                         QUICK EDIT MODE
+                         =============================== -->
+                    <template if:true={isQuickEditMode}>
+                        <lightning-record-form
+                            record-id={selectedRecordId}
+                            object-api-name="Account"
+                            layout-type="Compact"
+                            mode="edit"
+                            onsuccess={handleSave}>
+                        </lightning-record-form>
+                    </template>
+
+                    <!-- ===============================
+                         FULL CUSTOM EDIT MODE
+                         =============================== -->
+                    <template if:true={isFullEditMode}>
+                        <lightning-record-edit-form
+                            record-id={selectedRecordId}
+                            object-api-name="Account"
+                            onsuccess={handleSave}>
+
+                            <lightning-input-field field-name="Name"></lightning-input-field>
+                            <lightning-input-field field-name="Industry"></lightning-input-field>
+                            <lightning-input-field field-name="Phone"></lightning-input-field>
+
+                            <lightning-button
+                                type="submit"
+                                label="Save"
+                                variant="brand">
+                            </lightning-button>
+
+                        </lightning-record-edit-form>
+                    </template>
+
+                </template>
+
+                <template if:false={selectedRecordId}>
+                    <p>Select a record to view details</p>
+                </template>
+
+            </lightning-layout-item>
+
+        </lightning-layout>
+
+    </lightning-card>
+    <c-view-source source="lwc/patternMasterDetailRecords" slot="footer"> Pattern Master Detail Records </c-view-source>
+</template>
