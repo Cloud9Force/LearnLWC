@@ -21,22 +21,26 @@ export default class DynamicHostInteraction extends LightningElement {
      * ============================================================
      */
     handleCreateAndInteract() {
+        if (this.dynamicChild) {
+            this.lastEventMessage = 'Dynamic child already exists';
+            return;
+        }
 
         /**
          * STEP 1: Create the component
-         
-        const element = createElement(
-            'c-dynamic-simple-child',
-            { is: DynamicSimpleChild }
-        );
-        */
-        const { tagName, ctor } =
-            getDynamicComponentConfig('simple');
-
-        const element = createElement(
-            tagName,
-            { is: ctor }
-        );
+         */
+        let element;
+        try {
+            const { tagName, ctor } = getDynamicComponentConfig('simple');
+            element = createElement(
+                tagName,
+                { is: ctor }
+            );
+        } catch (error) {
+            this.lastEventMessage =
+                error?.message ?? 'Failed to create dynamic child';
+            return;
+        }
         /**
          * STEP 2: Set properties IMPERATIVELY
          *
