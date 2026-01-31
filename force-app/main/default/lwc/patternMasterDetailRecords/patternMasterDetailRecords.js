@@ -75,15 +75,22 @@ export default class PatternMasterDetailRecords extends LightningElement {
         this.mode = name;
     }
 
-    handleSave(event) {
-        event.preventDefault(); // stop the form from submitting to avoid the default behavior of the form
-        const fields = event.detail.fields;
-        console.log('Fields', fields);
-        //fields.Type = 'Prospect'; // modify a field to set default value if user has not entered a value
-        this.template.querySelector('lightning-record-form').submit(fields); //submit the form with the modified fields
+    handleRecordFormSuccess() {
         // After save, return to view mode
-        this.mode = 'view'; //return to view mode
+        this.mode = 'view';
     }
+
+    handleEditFormSubmit(event) {
+        // onsubmit fires before save; prevent default to control submission
+        event.preventDefault();
+        const fields = event.detail.fields;
+        this.template.querySelector('lightning-record-edit-form').submit(fields);
+    }
+
+    handleEditFormSuccess() {
+        this.mode = 'view';
+    }
+
     handleSuccess(event) {
         const evt = new ShowToastEvent({
             title: 'Account created',

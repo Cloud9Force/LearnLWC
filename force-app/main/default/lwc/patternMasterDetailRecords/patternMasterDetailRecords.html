@@ -55,7 +55,7 @@
                             object-api-name="Account"
                             layout-type="Compact"
                             mode="edit"
-                            onsuccess={handleSave}>
+                            onsuccess={handleRecordFormSuccess}>
                         </lightning-record-form>
                     </template><!--layout-type="Full" mode="view",read-only-->
 
@@ -66,7 +66,8 @@
                         <lightning-record-edit-form
                             record-id={selectedRecordId}
                             object-api-name="Account"
-                            onsuccess={handleSave}>
+                            onsubmit={handleEditFormSubmit}
+                            onsuccess={handleEditFormSuccess}>
 
                             <lightning-input-field field-name="Name"></lightning-input-field>
                             <lightning-input-field field-name="Industry"></lightning-input-field>
