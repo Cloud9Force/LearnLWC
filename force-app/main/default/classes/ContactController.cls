@@ -57,6 +57,12 @@ public with sharing class ContactController {
         String firstName,
         String lastName
     ) {
+        // Make sure we can update the database before trying to update
+        if (!Schema.sObjectType.Contact.isUpdateable()) {
+            throw new SecurityException(
+                'Insufficient permissions to update contacts'
+            );
+        }
         Contact contact = new Contact(
             Id = recordId,
             FirstName = firstName,

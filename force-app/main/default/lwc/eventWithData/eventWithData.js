@@ -8,7 +8,8 @@ export default class EventWithData extends LightningElement {
 
     handleSelect(event) {
         const contactId = event.detail;
-        this.selectedContact = this.contacts.data.find(
+        const contactList = this.contacts?.data || [];
+        this.selectedContact = contactList.find(
             (contact) => contact.Id === contactId
         );
     }
