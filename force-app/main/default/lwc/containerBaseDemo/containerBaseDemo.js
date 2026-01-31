@@ -10,7 +10,6 @@ export default class ContainerBaseDemo extends LightningElement {
     @track isVerticalTabs = false;
     @api horizontalAlign = 'space';
     selectedItemValue;
-    lastMenuAction;
     @track buttonGroupMessage = 'No button group action yet';
 
     // Called when an accordion section opens or closes

@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Event Handling Playground">
+
+        <!-- 1) Declarative Single Listener -->
+        <section>
+            <h3>1. Declarative Event Listener</h3>
+            <c-event-declerative-single onevent={handleDeclerativeSingleEvent}></c-event-declerative-single>
+            <p>Simple: {declerativeSingleMsg}</p>eventDeclerativeSingle
+        </section>
+
+        
+        <c-view-source source="lwc/eventHandlingPlaygroundParent" slot="footer">Event Handling Playground Parent</c-view-source>
+    </lightning-card>
+</template>
