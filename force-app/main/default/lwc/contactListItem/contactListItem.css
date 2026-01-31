@@ -1,0 +1,14 @@
+img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.contact-tile {
+    width: 100%;
+    text-align: left;
+}
+
+.contact-tile:hover {
+    background-color: var(--lwc-colorBackgroundRowHover, #f3f2f2);
+}

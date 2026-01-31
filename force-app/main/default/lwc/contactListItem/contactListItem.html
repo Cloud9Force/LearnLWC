@@ -1,0 +1,14 @@
+<template>
+    <button
+        class="slds-button slds-button_reset slds-box slds-box_x-small slds-media slds-media_center slds-media_small contact-tile"
+        type="button"
+        onclick={handleClick}
+        aria-label={ariaLabel}>
+        <span class="slds-media__figure">
+            <img src={contact.Picture__c} alt="Profile photo" />
+        </span>
+        <span class="slds-media__body">
+            <p class="slds-text-title_bold">{contact.Name}</p>
+        </span>
+    </button>
+</template>
