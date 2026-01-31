@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Multiple Event Listeners Declaratively (lwc:on)">
+    <lightning-button
+        label="Multi Event Source"
+        onclick={dispatchBoth}>
+    </lightning-button>
+    <!--
+            lwc:on accepts an OBJECT
+            where:
+            - keys   = DOM event names
+            - values = handler functions
+        -->
+        <lightning-button
+            label="Multi Event Source Hover,click,focus"
+            lwc:on={eventHandlers}>
+        </lightning-button>
+
+        <p>Last Event: {lastEvent}</p>
+</lightning-card>
+</template>

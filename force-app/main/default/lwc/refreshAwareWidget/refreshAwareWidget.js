@@ -7,26 +7,7 @@ import {
  registerRefreshHandler registers your component’s refresh callback with the Lightning Refresh system.
 So when a global refresh happens (e.g. another component dispatches RefreshEvent), the framework will call your handler (handleRefresh) so you can reload data or update UI.
 In short: it subscribes your component to global refresh events.
-1️⃣ Refresh is broadcast
-
-No direct calls between components.
-
-2️⃣ Refresh is intent-based
-
-Controller doesn’t know what refreshed.
-
-3️⃣ Each component interprets refresh differently
-
-One might:
-
-requery Apex
-
-rewire data
-
-recalc metrics
-
-reset filters 
-*/
+ */
 
 export default class RefreshAwareWidget extends LightningElement {
 
