@@ -1,4 +1,9 @@
 import { LightningElement, track } from 'lwc';
+import TYPE_FIELD from '@salesforce/schema/Account.Type';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import NAME_FIELD from '@salesforce/schema/Account.Name';
+import REVENUE_FIELD from '@salesforce/schema/Account.AnnualRevenue';
+import INDUSTRY_FIELD from '@salesforce/schema/Account.Industry';
 
 export default class PatternMasterDetailRecords extends LightningElement {
 
@@ -27,7 +32,8 @@ export default class PatternMasterDetailRecords extends LightningElement {
                 rowActions: [
                     { label: 'View', name: 'view' },
                     { label: 'Quick Edit', name: 'quickEdit' },
-                    { label: 'Full Edit', name: 'fullEdit' }
+                    { label: 'Full Edit', name: 'fullEdit' },
+                    { label: 'Create', name: 'create' }
                 ]
             }
         }
@@ -48,6 +54,12 @@ export default class PatternMasterDetailRecords extends LightningElement {
     get isFullEditMode() {
         return this.mode === 'fullEdit';
     }
+    get isCreateMode() {
+        return this.mode === 'create';
+    }
+
+    fields = [NAME_FIELD, REVENUE_FIELD, INDUSTRY_FIELD];
+
 
     /* =====================================================
        EVENT HANDLERS
@@ -63,8 +75,21 @@ export default class PatternMasterDetailRecords extends LightningElement {
         this.mode = name;
     }
 
-    handleSave() {
+    handleSave(event) {
+        event.preventDefault(); // stop the form from submitting to avoid the default behavior of the form
+        const fields = event.detail.fields;
+        console.log('Fields', fields);
+        //fields.Type = 'Prospect'; // modify a field to set default value if user has not entered a value
+        this.template.querySelector('lightning-record-form').submit(fields); //submit the form with the modified fields
         // After save, return to view mode
-        this.mode = 'view';
+        this.mode = 'view'; //return to view mode
+    }
+    handleSuccess(event) {
+        const evt = new ShowToastEvent({
+            title: 'Account created',
+            message: 'Record ID: ' + event.detail.id,
+            variant: 'success',
+        });
+        this.dispatchEvent(evt);
     }
 }

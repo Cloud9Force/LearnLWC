@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="Parent Listener">
+
+        <!-- SAME SHADOW TREE -->
+        <section>
+            <h2 class="slds-text-heading_medium">Same Shadow Tree</h2>
+
+            <c-event-same-shadow-child
+                onsameevent={handleSameEvent}>
+            </c-event-same-shadow-child>
+
+            <p>Received onsameevent in Parent: {sameShadowMessage}</p>
+        </section>
+
+        <!-- DIFFERENT SHADOW TREE 
+         The parent does NOT listen to the event.
+         This is intentional — we want the grandparent to listen.
+         -->
+        <section>
+            <h2 class="slds-text-heading_medium">Different Shadow Tree</h2>
+            
+            <c-event-different-shadow-child ondifferentevent={handleDifferentEvent}>
+            </c-event-different-shadow-child>
+
+            <p>Received ondifferentevent in Parent: {differentShadowMessage}</p>
+        </section>
+
+    
+    </lightning-card>
+</template>

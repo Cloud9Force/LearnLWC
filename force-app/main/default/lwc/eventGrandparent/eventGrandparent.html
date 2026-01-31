@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title="Grandparent Listener">
+        <p>The parent listen to the event.
+            We want the grandparent to listen as well.</p>
+        <c-event-demo-parent
+            ondifferentevent={handleDifferentEvent}
+            onsameevent={handleSameEvent}>
+        </c-event-demo-parent>
+        <!-- Same shadow tree 
+         By the time the event reaches the grandparent, it has crossed shadow boundaries, so event.target is retargeted (you won’t see the child instance). That’s why sameShadowMessageFromTarget shows No target.
+For the grandparent, you must use event.detail. If you’re seeing No detail, then the event is still being fired without detail.
+Make sure the child dispatch includes it:-->
+        <p><strong>Same shadow (detail) in Grandparent:</strong> {sameShadowMessageFromDetail}</p>
+        <p><strong>Same shadow (target):</strong> {sameShadowMessageFromTarget}</p>
+        <!-- Different shadow tree -->
+        <!-- Yes. differentevent includes detail.message, so fromDetail works.
+Since it crosses shadow boundaries, event.target is retargeted and the original child isn’t visible, so fromTarget won’t be reliable. -->
+        <p><strong>From event.target in Grandparent:</strong> {fromTarget}</p>
+        <p><strong>From event.detail in Grandparent:</strong> {fromDetail}</p>
+
+    <c-view-source source="lwc/eventGrandparent" slot="footer">Event Grandparent</c-view-source>
+    </lightning-card>
+</template>

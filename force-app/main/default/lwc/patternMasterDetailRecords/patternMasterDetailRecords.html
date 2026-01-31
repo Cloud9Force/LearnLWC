@@ -37,6 +37,13 @@
                             <lightning-output-field field-name="Phone"></lightning-output-field>
 
                         </lightning-record-view-form>
+                        <lightning-record-form
+                            record-id={selectedRecordId}
+                            object-api-name="Account"
+                            layout-type="Compact"
+                            mode="view"
+                            >    <!--layout-type="Full" mode="view",read-only-->
+                </lightning-record-form>
                     </template>
 
                     <!-- ===============================
@@ -50,7 +57,7 @@
                             mode="edit"
                             onsuccess={handleSave}>
                         </lightning-record-form>
-                    </template>
+                    </template><!--layout-type="Full" mode="view",read-only-->
 
                     <!-- ===============================
                          FULL CUSTOM EDIT MODE
@@ -72,6 +79,28 @@
                             </lightning-button>
 
                         </lightning-record-edit-form>
+                    </template>
+                    <!-- ===============================
+                         FULL CUSTOM CREATE MODE
+                         =============================== -->
+                    <template if:true={isCreateMode}>
+                         <lightning-record-form
+                                object-api-name="Account"
+                                fields={fields}
+                                onsuccess={handleSuccess}
+                            >
+                            </lightning-record-form>
+                            <lightning-record-edit-form object-api-name="Account">
+                                <lightning-messages> </lightning-messages>
+                                <lightning-input-field field-name="Name"> </lightning-input-field>
+                                <lightning-button
+                                    class="slds-m-top_small"
+                                    type="submit"
+                                    label="Create new"
+                                >
+                                </lightning-button>
+                            </lightning-record-edit-form>
+
                     </template>
 
                 </template>
