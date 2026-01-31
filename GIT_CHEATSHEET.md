@@ -1,7 +1,15 @@
 # Git Cheat Sheet (Team Workflow)
-
+Update your local main
 This is a short, practical guide for working on LWCs with a team.
-
+git checkout main
+git pull --no-rebase origin main
+Create and switch to your branch
+git checkout -b feature/my-new-lwc
+Work, then commit
+git add .
+git commit -m "feat(lwc): add my-new-lwc"
+Push your branch
+git push -u origin feature/my-new-lwc
 ## What Git Is Doing (Concept)
 - Git is a local version control system on your computer.
 - It watches your files and records snapshots (commits).
