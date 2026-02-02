@@ -23,7 +23,7 @@ git pull origin task-work
 
 # Always get changes from GitHub Repo(origin/main) or remote branch INTO local Repo (main)  or local branch before pushing the local(repo/branch) into the remote (repo/branch).
 git push -u origin main 
-it push origin task-work
+git push origin task-work
 
 Create my branch in local 
 git checkout -b task-work  (creates new branch and checkout in one command)
