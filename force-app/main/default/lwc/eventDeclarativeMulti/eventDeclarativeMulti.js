@@ -40,4 +40,22 @@ export default class EventDemoMulti extends LightningElement {
     handleFocus(event) {
         this.lastEvent = 'focus';
     }
+    dispatchClick() {
+        // Dispatch based on expected mode (in real app, could detect parent mode)
+        this.dispatchEvent(new CustomEvent('lightclick', {
+            detail: { action: 'Button clicked!' },
+            bubbles: true, composed: true
+        }));
+        this.dispatchEvent(new CustomEvent('darkclick', {
+            detail: { action: 'Dark button clicked!' },
+            bubbles: true, composed: true
+        }));
+    }
+
+    dispatchChange(event) {
+        this.dispatchEvent(new CustomEvent('lightchange', {
+            detail: { value: event.target.value },
+            bubbles: true, composed: true
+        }));
+    }
 }

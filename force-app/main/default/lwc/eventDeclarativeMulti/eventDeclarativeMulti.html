@@ -9,12 +9,25 @@
             where:
             - keys   = DOM event names
             - values = handler functions
-        -->
+        -
         <lightning-button
             label="Multi Event Source Hover,click,focus"
             lwc:on={eventHandlers}>
         </lightning-button>
 
         <p>Last Event: {lastEvent}</p>
+    -->
+        <div class="child-buttons">
+            <lightning-button 
+                label="Click Me" 
+                onclick={dispatchClick}
+                class="slds-m-around_small">
+            </lightning-button>
+            <lightning-input 
+                label="Change Me" 
+                onchange={dispatchChange}
+                class="slds-m-around_small">
+            </lightning-input>
+        </div>
 </lightning-card>
 </template>

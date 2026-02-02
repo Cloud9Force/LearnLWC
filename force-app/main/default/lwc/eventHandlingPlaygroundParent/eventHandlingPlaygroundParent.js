@@ -5,10 +5,10 @@ export default class EventsHandlingPlayground extends LightningElement {
     @track declerativeSingleMsg = '';
     @track multi1Msg = '';
     @track multi2Msg = '';
-    @track useDynamic = false;
-    @track dynamicMsg = '';
-    @track imperativeMsg = '';
-    @track dispatchedFrom = '';
+    
+    
+    
+    
     @track retargetMsg = '';
     @track inputValue = '';
 
@@ -25,7 +25,80 @@ export default class EventsHandlingPlayground extends LightningElement {
         this.multi2Msg = event.detail.msg;
     }
 
-    // 3) Dynamic
+    @track currentMode = 'light';
+    @track statusMessage = 'Waiting...';
+
+    // Dynamic handlers object - changes trigger listener updates
+    get dynamicHandlers() {
+        if (this.currentMode === 'light') {
+            return {
+                lightclick: this.handleLightClick,
+                lightchange: this.handleLightChange
+            };
+        } else {
+            return {
+                darkhover: this.handleDarkHover,
+                darkclick: this.handleDarkClick
+            };
+        }
+    }
+
+    get lightModeButtonClass() {
+        return this.currentMode === 'light' ? 'slds-button_brand' : '';
+    }
+
+    get darkModeButtonClass() {
+        return this.currentMode === 'dark' ? 'slds-button_brand' : '';
+    }
+
+    setLightMode() {
+        this.currentMode = 'light';
+        this.statusMessage = 'Switched to light mode listeners';
+    }
+
+    setDarkMode() {
+        this.currentMode = 'dark';
+        this.statusMessage = 'Switched to dark mode listeners';
+    }
+
+    // Light mode handlers
+    handleLightClick(event) {
+        this.statusMessage = `Light clicked: ${event.detail.action}`;
+    }
+
+    handleLightChange(event) {
+        this.statusMessage = `Light changed: ${event.detail.value}`;
+    }
+
+    // Dark mode handlers
+    handleDarkHover(event) {
+        this.statusMessage = `Dark hovered: ${event.detail.target}`;
+    }
+
+    handleDarkClick(event) {
+        this.statusMessage = `Dark clicked: ${event.detail.action}`;
+    }
+
+    //3)Dynamic Event
+    customEventDetail = "";
+    eventHandlers = {
+        customEvent: this.handleCustomEvent,
+    };
+
+    handleCustomEvent(event) {
+        this.customEventDetail = `${event.detail}`;
+    }
+
+    switchEventListener() {
+        this.eventHandlers = this.eventHandlers.customEvent
+        ? { anotherCustomEvent: this.handleCustomEvent }
+        : { customEvent: this.handleCustomEvent };
+    }
+
+
+    // 4) Dynamic
+    @track useDynamic = false;
+    @track dynamicMsg = '';
     toggleDynamic() {
         this.useDynamic = !this.useDynamic;
     }
@@ -33,12 +106,19 @@ export default class EventsHandlingPlayground extends LightningElement {
         this.dynamicMsg = event.detail.msg;
     }
 
-    // 4) Imperative
+    // 5) Imperative
+    @track imperativeMsg = '';
     handleImperative(msg) {
         this.imperativeMsg = msg;
     }
+    constructor() {
+        super();
+        this.template.addEventListener("notification", this.handleNotification);
+      }
+      handleNotification = () => {};
 
     // 5) Reference to dispatching component
+    @track dispatchedFrom = '';
     handleReference(event) {
         // event.target is the component instance that dispatched
         this.dispatchedFrom = event.target.localName;

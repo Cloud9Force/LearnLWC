@@ -7,8 +7,92 @@
             <c-event-declerative-single onevent={handleDeclerativeSingleEvent}></c-event-declerative-single>
             <p>Simple: {declerativeSingleMsg}</p>eventDeclerativeSingle
         </section>
+        <!-- 2) Multiple Event Listeners Declaratively -->
+         <section>
+            <h3>2. Multiple Event Listeners Declaratively</h3>
+            <c-event-declarative-multi onmulti1={handleMulti1} onmulti2={handleMulti2}></c-event-declarative-multi>
+            <p>Multi1: {multi1Msg}</p>
+            <p>Multi2: {multi2Msg}</p>
+         </section>
 
+         <section>
+            <div class="demo-container">
+                <h3>lwc:on Multiple Listeners Demo</h3>
+                <p>Mode: {currentMode}</p>
+                <p>Status: {statusMessage}</p>
+                
+                <!-- Toggle between modes, switches listeners dynamically -->
+                <lightning-button 
+                    label="Light Mode" 
+                    onclick={setLightMode}
+                    class={lightModeButtonClass}>
+                </lightning-button>
+                <lightning-button 
+                    label="Dark Mode" 
+                    onclick={setDarkMode}
+                    class={darkModeButtonClass}>
+                </lightning-button>
+                
+                <!-- Child dispatches different events based on mode -->
+                <!-- <c-event-declarative-multi lwc:on={dynamicHandlers}></c-event-declarative-multi> -->
+            </div>
+         </section>
+
+        <!-- 3) Attach/Remove Event Listeners Declaratively & Dynamically -->
+        <section>
+            <h3>3. Dynamic Event Listener</h3>
+            <lightning-button
+                label="Toggle Listener"
+                onclick={toggleDynamic}>
+            </lightning-button>
+
+            <template if:true={useDynamic}>
+                <c-event-demo-dynamic ondynamic={handleDynamic}></c-event-demo-dynamic>
+                <p>Dynamic message sent by Child (LWC eventDemoDynamic) : {dynamicMsg}</p>
+            </template>
+        </section>
+        <!--
+        <section>
+            <h3>2. Dynamic Event Listener</h3>
+            <c-event-dynamic-child
+                lwc:on={eventHandlers}></c-event-dynamic-child>
+            
+            <p>Custom event received: {customEventDetail}</p>
+            <lightning-button onclick={switchEventListener} label="Switch Event Listener">
+            </lightning-button>
+        </section>
+        -->
         
+
+        <!-- 4) Imperative Event Listener -->
+        <section>
+            <h3>4. Imperative Event Listener</h3>
+            <c-event-demo-imperative></c-event-demo-imperative>
+            <p>Imperative: {imperativeMsg}</p>
+        </section>
+
+        <!-- 5) Reference to Dispatching Component -->
+        <section>
+            <h3>5. Reference to Dispatching Component</h3>
+            <c-event-demo-reference onrefer={handleReference}></c-event-demo-reference>
+            <p>Dispatched By: {dispatchedFrom}</p>
+        </section>
+
+        <!-- 6) Event Retargeting -->
+        <section>
+            <h3>6. Event Retargeting</h3>
+            <c-event-demo-retarget oncross={handleCrossRetarget}></c-event-demo-retarget>
+            <p>Retarget Message: {retargetMsg}</p>
+        </section>
+
+        <!-- 7) Listen for Input Field Changes -->
+        <section>
+            <h3>7. Listen for Input Changes</h3>
+            <c-event-demo-input onchangefield={handleInputChange}></c-event-demo-input>
+            <p>Input Value: {inputValue}</p>
+        </section>
+        
+
         <c-view-source source="lwc/eventHandlingPlaygroundParent" slot="footer">Event Handling Playground Parent</c-view-source>
     </lightning-card>
 </template>

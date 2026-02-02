@@ -299,17 +299,18 @@
             <section class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
                  <p class="slds-text-heading_small">Dynamic Event Listener Demo</p>
 
-            <p class="slds-text-body_regular slds-m-bottom_small">
-                Last Event: {lastDynamicEvent}
-            </p>
+                <p class="slds-text-body_regular slds-m-bottom_small">
+                    Last Event: {lastDynamicEvent}
+                </p>
 
-            <c-dynamic-event-child
-                name={dynamicChildName}
-                age={dynamicChildAge}
-                onchildinitialized={handleChildInitialized}
-                onchildupdated={handleChildUpdated}>
-            </c-dynamic-event-child>
-                                                        </section>
+                <c-dynamic-event-child
+                    name={dynamicChildName}
+                    age={dynamicChildAge}
+                    onchildinitialized={handleChildInitialized}
+                    onchildupdated={handleChildUpdated}>
+                </c-dynamic-event-child>
+            
+            </section>
             <c-view-source source="lwc/dynamicEventChild" slot="footer">
                 Dynamic Event Listeners demo (lwc:on)
             </c-view-source>
