@@ -1,0 +1,62 @@
+<template>
+    <!-- ================================================
+         LDS - Multiple Records (getRecords)
+         ================================================
+         When to Use getRecords
+            - You need multiple records
+            - You want reactivity & caching
+            - You want zero Apex
+            - You need FLS & sharing automatically
+        This component teaches everything you must know about handling collections in LWC:
+            - Fetching multiple records by ID
+            - Understanding arrays returned from LDS
+            - Understanding the structure of the data returned from LDS
+            - Using JavaScript array methods: map, find, filter
+            - Preparing data for tables and grids
+                - Clean separation of raw data, transformed data, and UI rendering
+         When NOT to Use getRecords
+            - You need a single record
+            - You need to aggregate data
+            - You need to join records
+            - You need to perform server-side logic
+            - Unknown IDs
+            - Filtering
+            - Aggregations
+            - Tree structures
+        This is the bridge between getRecord and datatables.
+        Why this template is important
+            - Introduces for:each
+            - Uses key correctly
+            - Displays transformed data, not raw LDS response
+            - No direct LDS access in HTML
+
+         -->
+    <lightning-card
+        title="LDS – Multiple Records (getRecords)"
+        icon-name="standard:records">
+
+        <div class="slds-p-around_medium">
+
+            <template if:true={accounts}>
+                <template for:each={accounts} for:item="account">
+                    <div key={account.id} class="slds-m-bottom_small">
+                        <p>
+                            <strong>{account.name}</strong> — {account.industry}
+                            <span class="slds-m-left_x-small">(status: {account.statusCode})</span>
+                        </p>
+                        <p><strong>Phone:</strong> {account.phone}</p>
+                        <p><strong>Website:</strong> {account.website}</p>
+                    </div>
+                </template>
+            </template>
+
+            <template if:true={errorMessage}>
+                <p class="slds-text-color_error">
+                    {errorMessage}
+                </p>
+            </template>
+
+        </div>
+        <c-view-source source="lwc/wireLdsGetRecords" slot="footer"> Wire LDS Get Records </c-view-source>
+    </lightning-card>
+</template>

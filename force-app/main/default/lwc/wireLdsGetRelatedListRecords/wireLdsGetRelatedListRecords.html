@@ -1,0 +1,13 @@
+<template>
+    <lightning-card
+        title="LDS – Related List Records (Tree Grid)"
+        icon-name="standard:hierarchy">
+
+        <lightning-tree-grid
+            key-field="id"
+            data={treeData}
+            columns={columns}>
+        </lightning-tree-grid>
+        <c-view-source source="lwc/wireLdsGetRelatedListRecords" slot="footer"> Wire LDS Get Related List Records </c-view-source>
+    </lightning-card>
+</template>

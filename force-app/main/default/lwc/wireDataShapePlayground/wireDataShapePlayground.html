@@ -1,0 +1,47 @@
+<template>
+    <lightning-card
+        title="Salesforce Wire Data Shape Resolver"
+        icon-name="utility:code_playground">
+
+        <!-- getRecord -->
+        <div class="slds-p-around_medium">
+            <h3 class="slds-text-heading_small">getRecord</h3>
+            <lightning-datatable
+                key-field="id"
+                data={getRecordTableData}
+                columns={recordColumns}>
+            </lightning-datatable>
+        </div>
+
+        <!-- getRecords -->
+        <div class="slds-p-around_medium">
+            <h3 class="slds-text-heading_small">getRecords</h3>
+            <lightning-datatable
+                key-field="id"
+                data={getRecordsTableData}
+                columns={recordColumns}>
+            </lightning-datatable>
+        </div>
+
+        <!-- getObjectInfo -->
+        <div class="slds-p-around_medium">
+            <h3 class="slds-text-heading_small">getObjectInfo</h3>
+            <lightning-datatable
+                key-field="apiName"
+                data={objectInfoTableData}
+                columns={metadataColumns}>
+            </lightning-datatable>
+        </div>
+
+        <!-- Tree Grid -->
+        <div class="slds-p-around_medium">
+            <h3 class="slds-text-heading_small">Related List (Tree Grid)</h3>
+            <lightning-tree-grid
+                key-field="id"
+                data={treeGridData}
+                columns={treeColumns}>
+            </lightning-tree-grid>
+        </div>
+        <c-view-source source="lwc/wireDataShapePlayground" slot="footer"> Wire Data Shape Playground </c-view-source>
+    </lightning-card>
+</template>

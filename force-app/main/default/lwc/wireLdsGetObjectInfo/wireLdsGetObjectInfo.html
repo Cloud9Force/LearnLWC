@@ -1,0 +1,41 @@
+<template>
+    <lightning-card
+        title="LDS – Object Metadata (getObjectInfo)"
+        icon-name="standard:custom">
+
+        <div class="slds-p-around_medium">
+            <template if:true={objectInfoTreeItems}>
+                <p class="slds-m-top_medium"><strong>Tree view (hierarchical):</strong></p>
+                <lightning-tree
+                    items={objectInfoTreeItems}
+                    class="slds-m-top_small">
+                </lightning-tree>
+            </template>
+
+            <template if:true={errorMessage}>
+                <p class="slds-text-color_error">
+                    {errorMessage}
+                </p>
+            </template>
+
+
+            <template if:true={objectLabel}>
+                <p><strong>Object:</strong> {objectLabel}</p>
+                <p><strong>API Name:</strong> {objectApiName}</p>
+                <p><strong>Createable:</strong> {isCreateable}</p>
+            </template>
+
+            <template if:true={fieldList}>
+                <p class="slds-m-top_medium"><strong>Fields(Only 5 fields):</strong></p>
+                <ul>
+                    <template for:each={fieldList} for:item="field">
+                        <li key={field.apiName}>
+                            {field.label} ({field.apiName})
+                        </li>
+                    </template>
+                </ul>
+            </template>
+        </div>
+        <c-view-source source="lwc/wireLdsGetObjectInfo" slot="footer"> Wire LDS Get Object Info </c-view-source>
+    </lightning-card>
+</template>
