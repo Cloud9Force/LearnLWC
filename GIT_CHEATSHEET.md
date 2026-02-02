@@ -25,22 +25,26 @@ git pull origin task-work
 git push -u origin main 
 git push origin task-work
 
+
 Create my branch in local 
 git checkout -b task-work  (creates new branch and checkout in one command)
 Creates same branch in remote too
  git push -u origin task-work
+git push -u origin feature/event-playground
 
-Bring changes from Remote branch task-work)  to my local branch
+Bring changes from Remote branch task-work  to my local branch
 Check out local branch 
-
 git checkout task-work
 
-Bring changes from Remote branch task-work)  to my local branch
-
+Bring changes from Remote branch task-work  to my local branch
 git pull origin task-work
 
 Push changes from my local branch to branch in remote
 git push origin task-work
+
+
+to stash a change in local file - before merging the branch to remote and then re apply stash locally to start working on it
+git stash push -m "temp: stash before merge" && git checkout main && git merge feature/event-playground 
 
 To merge your local branch task-work changes into local main repo:
 git checkout main (checkout to local main repo)
