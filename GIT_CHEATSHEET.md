@@ -12,7 +12,7 @@ Create a new project in the local and put it into a new Github repo - Following 
 In your laptop go to your project folder in terminal cd /Users/bhupendra/ai-for-salesforce (Project folder)
 git init (initialises git into project folder)
 git add . (Add the files to staging)
-git commit -m "Initial commit" (commits the changes into local main)
+git commit -m "Salesforce Data LWC commit" (commits the changes into local main)
 git branch -M main (trying to name the local as main but it is generally main by default)
 git remote add origin https://github.com/<your-username>/python-learning.git (connecting to repo you have created in GitHub named as Origin/main by default)
 git push -u origin main (push your local main to remote)
