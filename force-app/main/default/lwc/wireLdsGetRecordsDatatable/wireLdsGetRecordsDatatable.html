@@ -1,0 +1,14 @@
+<template>
+    <lightning-card
+        title="LDS – getRecords with Datatable"
+        icon-name="standard:datatable">
+
+        <lightning-datatable
+            key-field="id"
+            data={tableData}
+            columns={columns}
+            hide-checkbox-column>
+        </lightning-datatable>
+        <c-view-source source="lwc/wireLdsGetRecordsDatatable" slot="footer"> Wire LDS Get Records Datatable </c-view-source>
+    </lightning-card>
+</template>

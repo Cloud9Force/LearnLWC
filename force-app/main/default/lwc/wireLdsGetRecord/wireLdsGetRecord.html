@@ -1,0 +1,54 @@
+<template>
+    <!-- ================================================
+         LDS - Single Record (getRecord)
+         ================================================
+         When to Use getRecord
+            - You need one record
+            - You want reactivity & caching
+            - You want zero Apex
+            - You need FLS & sharing automatically
+        When NOT to Use getRecord
+            - Multiple unrelated records
+            - Aggregations
+            - Tree structures
+            - Complex joins
+            - Server-side logic
+         -->
+    <lightning-card
+        title="LDS – Single Record (getRecord)" icon-name="standard:record">
+
+        <div class="slds-p-around_medium">
+
+            <template if:true={accountName}>
+                <p><strong>Name:</strong> {accountName}</p>
+                <p><strong>Industry:</strong> {industry}</p>
+                <p><strong>Phone:</strong> {phone}</p>
+            </template>
+
+            <template if:true={errorMessage}>
+                <p class="slds-text-color_error">
+                    {errorMessage}
+                </p>
+            </template>
+
+            <div class="slds-m-top_medium">
+                <lightning-button
+                    label="Refresh Data"
+                    variant="neutral"
+                    onclick={handleRefresh}>
+                </lightning-button>
+                <lightning-button
+                    class="slds-m-left_x-small"
+                    label="Notify LDS"
+                    variant="neutral"
+                    onclick={handleNotifyChange}>
+                </lightning-button>
+                <p class="slds-m-top_x-small">
+                    <strong>Refresh:</strong> {refreshMessage}
+                </p>
+            </div>
+        </div>
+        <c-view-source source="lwc/wireLdsGetRecord" slot="footer"> Wire LDS Get Record </c-view-source>
+
+    </lightning-card>
+</template>

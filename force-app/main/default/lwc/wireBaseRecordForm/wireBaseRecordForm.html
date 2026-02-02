@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Base Record Form Displaying Data" icon-name="custom:custom11">
+        <lightning-record-form
+            object-api-name="Account"
+            record-id={recordId}
+            layout-type="Full"
+            mode="edit">
+        </lightning-record-form>
+        <c-view-source source="lwc/wireBaseRecordForm" slot="footer"> Wire Base Record Form </c-view-source>
+    </lightning-card>
+</template>
